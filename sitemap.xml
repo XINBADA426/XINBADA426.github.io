@@ -3,15 +3,26 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://XINBADA426.github.io/categories/</loc>
+    <loc>https://XINBADA426.github.io/post/blog/</loc>
+    <lastmod>2020-05-28T04:10:33+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://XINBADA426.github.io/</loc>
+    <loc>https://XINBADA426.github.io/</loc>
+    <lastmod>2020-05-28T04:10:33+08:00</lastmod>
   </url>
   
   <url>
-    <loc>http://XINBADA426.github.io/tags/</loc>
+    <loc>https://XINBADA426.github.io/post/</loc>
+    <lastmod>2020-05-28T04:10:33+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://XINBADA426.github.io/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>https://XINBADA426.github.io/tags/</loc>
   </url>
   
 </urlset>
