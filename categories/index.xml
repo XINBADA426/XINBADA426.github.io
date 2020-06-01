@@ -2,13 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Ming</title>
-    <link>http://xinbada426.github.io/categories/</link>
+    <link>https://xinbada426.github.io/categories/</link>
     <description>Recent content in Categories on Ming</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
+    <lastBuildDate>Tue, 06 Feb 2018 09:55:09 +0800</lastBuildDate>
     
-	<atom:link href="http://xinbada426.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://xinbada426.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>bioinformation</title>
+      <link>https://xinbada426.github.io/categories/bioinformation/</link>
+      <pubDate>Tue, 06 Feb 2018 09:55:09 +0800</pubDate>
+      
+      <guid>https://xinbada426.github.io/categories/bioinformation/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

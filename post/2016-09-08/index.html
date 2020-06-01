@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-cn" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>GTF/GFF文件的差异及其相互转换 - Ming</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="Ming Jia" />
+  <meta name="description" content="我们在做生物分析的时候，经常会碰到GFF格式的文件以及GTF格式的注释文件。他们有着相似的名字，甚至连内容都极为相似~那么，他们究竟差在哪里" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.71.1" />
+
+
+<link rel="canonical" href="https://xinbada426.github.io/post/2016-09-08/" />
+
+
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+<meta property="og:title" content="GTF/GFF文件的差异及其相互转换" />
+<meta property="og:description" content="我们在做生物分析的时候，经常会碰到GFF格式的文件以及GTF格式的注释文件。他们有着相似的名字，甚至连内容都极为相似~那么，他们究竟差在哪里" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://xinbada426.github.io/post/2016-09-08/" />
+<meta property="article:published_time" content="2016-09-08T22:48:01+08:00" />
+<meta property="article:modified_time" content="2016-09-08T22:48:01+08:00" />
+<meta itemprop="name" content="GTF/GFF文件的差异及其相互转换">
+<meta itemprop="description" content="我们在做生物分析的时候，经常会碰到GFF格式的文件以及GTF格式的注释文件。他们有着相似的名字，甚至连内容都极为相似~那么，他们究竟差在哪里">
+<meta itemprop="datePublished" content="2016-09-08T22:48:01&#43;08:00" />
+<meta itemprop="dateModified" content="2016-09-08T22:48:01&#43;08:00" />
+<meta itemprop="wordCount" content="908">
+
+
+
+<meta itemprop="keywords" content="gtf,gff," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="GTF/GFF文件的差异及其相互转换"/>
+<meta name="twitter:description" content="我们在做生物分析的时候，经常会碰到GFF格式的文件以及GTF格式的注释文件。他们有着相似的名字，甚至连内容都极为相似~那么，他们究竟差在哪里"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">Ming</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://xinbada426.github.io/categories/">Categories</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://xinbada426.github.io/tags/">Tags</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      Ming
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://xinbada426.github.io/categories/">Categories</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://xinbada426.github.io/tags/">Tags</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">GTF/GFF文件的差异及其相互转换</h1>
+      
+      <div class="post-meta">
+        <time datetime="2016-09-08" class="post-time">
+          2016-09-08
+        </time>
+        <div class="post-category">
+            <a href="https://xinbada426.github.io/categories/bioinformation/"> bioinformation </a>
+            
+          </div>
+        
+
+        
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#数据结构">数据结构</a></li>
+    <li><a href="#gff">GFF</a></li>
+    <li><a href="#gtf">GTF</a></li>
+    <li><a href="#两种文件的差异比较">两种文件的差异比较</a></li>
+    <li><a href="#两种文件格式之间的转换">两种文件格式之间的转换</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <p><img src="https://upload-images.jianshu.io/upload_images/2638048-1e5af2226dcf79eb.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="MyTear"></p>
+<p>我们在做生物分析的时候，经常会碰到GFF格式的文件以及GTF格式的注释文件。他们有着相似的名字，甚至连内容都极为相似~那么，他们究竟差在哪里呢？</p>
+<p>GFF全称为<code>general feature format</code>，这种格式主要是用来注释基因组。
+GTF全称为<code>gene transfer format</code>，主要是用来对基因进行注释。</p>
+<hr>
+<h2 id="数据结构">数据结构</h2>
+<p>GTF文件以及GFF文件都由9列数据组成，这两种文件的前8列都是相同的（一些小的差别）</p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reference sequence name</td>
+<td>annotation source</td>
+<td>feature type</td>
+<td>start coordinate</td>
+<td>end coordinate</td>
+<td>score</td>
+<td>strand</td>
+<td>frame</td>
+<td>attributes</td>
+</tr>
+</tbody>
+</table>
+<h2 id="gff">GFF</h2>
+<p>GFF文件是一种用来描述基因组特征的文件，现在我们所使用的大部分都是第三版）（GFF3）。GFF允许使用<code>#</code>作为注释符号，例如很多GFF文件都会使用如下的两行来表明其版本其创建日期：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">##gff-version 2</span>
+<span class="c1">##created 11/11/11</span> 
+</code></pre></td></tr></table>
+</div>
+</div><p>GFF文件每一列所代表的含义前面表格中有，但请注意，它的第3列<code>feature type</code>是不受约束的，你可以使用任意的名称，但也不要太淘气~用一些适当的名称对于后面的分析会有很大的帮助。
+我们需要注意的是GFF文件的第9列，从第二版开始(GFF2)，所有的属性都以<code>标签=值</code>的方式呈现，各个属性之间以<code>;</code>作为分隔符</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">ID</span><span class="o">=</span>geneAExon1<span class="p">;</span><span class="nv">Name</span><span class="o">=</span>geneA<span class="p">;</span><span class="nv">Parent</span><span class="o">=</span>geneA<span class="p">;</span><span class="nv">Organism</span><span class="o">=</span>human
+</code></pre></td></tr></table>
+</div>
+</div><p>在最新版本的GFF文件中(GFF3)，有一些是已经预先定义的属性特征，并且这些特征往往还有特殊的含义：<code>ID</code>这个标签实在各行都要有的；另外有一个<code>Parent</code>的属性，它表明了当前的特征是Parent特征的子集。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">Contig01  PFAM  gene  <span class="m">501</span>  <span class="m">750</span>  .  +  <span class="m">0</span>  <span class="nv">ID</span><span class="o">=</span>geneA<span class="p">;</span><span class="nv">Name</span><span class="o">=</span>geneA
+Contig01  PFAM  exon  <span class="m">501</span>  <span class="m">650</span>  .  +  <span class="m">2</span>  <span class="nv">ID</span><span class="o">=</span>exonA1<span class="p">;</span><span class="nv">Parent</span><span class="o">=</span>geneA
+Contig01  PFAM  exon  <span class="m">700</span>  <span class="m">750</span>  .  +  <span class="m">2</span>  <span class="nv">ID</span><span class="o">=</span>exonA2<span class="p">;</span><span class="nv">Parent</span><span class="o">=</span>geneA
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="gtf">GTF</h2>
+<p>当前所广泛使用的GTF格式为第二版(GTF2)，它主要是用来描述基因的注释。GTF格式有两个硬性标准：</p>
+<ul>
+<li>根据所使用的软件的不同，<code>feature types</code>是必须注明的。</li>
+<li>第9列必须以<code>gene_id</code>以及<code>transcript_id</code>开头
+GTF文件的第9列同GFF文件不同，虽然同样是标签与值配对的情况，但标签与值之间以空格分开，且每个特征之后都要有分号<code>;</code>（包括最后一个特征）：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">gene_id <span class="s2">&#34;geneA&#34;</span><span class="p">;</span>transcript_id <span class="s2">&#34;geneA.1&#34;</span><span class="p">;</span>database_id <span class="s2">&#34;0012&#34;</span><span class="p">;</span>modified_by <span class="s2">&#34;Damian&#34;</span><span class="p">;</span>duplicates 0<span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="两种文件的差异比较">两种文件的差异比较</h2>
+<table>
+<thead>
+<tr>
+<th align="center">列</th>
+<th align="center">GTF2</th>
+<th align="center">GFF3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">reference sequence name</td>
+<td align="center">same</td>
+<td align="center">same</td>
+</tr>
+<tr>
+<td align="center">annotation source</td>
+<td align="center">same</td>
+<td align="center">same</td>
+</tr>
+<tr>
+<td align="center">feature type</td>
+<td align="center">feature requirements depend on software</td>
+<td align="center">can be anything</td>
+</tr>
+<tr>
+<td align="center">start coordinate</td>
+<td align="center">same</td>
+<td align="center">same</td>
+</tr>
+<tr>
+<td align="center">5. end coordinate</td>
+<td align="center">same</td>
+<td align="center">same</td>
+</tr>
+<tr>
+<td align="center">score</td>
+<td align="center">not used</td>
+<td align="center">optional</td>
+</tr>
+<tr>
+<td align="center">strand</td>
+<td align="center">same</td>
+<td align="center">same</td>
+</tr>
+<tr>
+<td align="center">frame</td>
+<td align="center">same</td>
+<td align="center">same</td>
+</tr>
+<tr>
+<td align="center">attributes</td>
+<td align="center">空格分隔</td>
+<td align="center"><code>=</code>分隔</td>
+</tr>
+</tbody>
+</table>
+<h2 id="两种文件格式之间的转换">两种文件格式之间的转换</h2>
+<p>偷个懒，直接使用Cufflinks里面的工具<code>gffread</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#gff2gtf</span>
+gffread my.gff3 -T -o my.gtf
+<span class="c1">#gtf2gff</span>
+gffread merged.gtf -o- &gt; merged.gff3
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<p><em><a href="http://blog.nextgenetics.net/?e=27">参考（可能需要梯子）</a></em></p>
+
+    </div>
+
+    
+    
+
+
+    
+    
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://xinbada426.github.io/tags/gtf/">gtf</a>
+          <a href="https://xinbada426.github.io/tags/gff/">gff</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/post/2018-02-06/">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">CAZy数据库简介</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+    
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+
+
+<a href="https://xinbada426.github.io/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    2020
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        Ming Jia
+        
+      </span></span>
+
+  
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin="anonymous"></script>
+
+
+
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css"
+    integrity="sha384-BdGj8xC2eZkQaxoQ8nSLefg4AV4/AwB3Fj+8SUSo7pnKP6Eoy18liIKTPn9oBYNG"
+    crossorigin="anonymous">
+
+  
+  <script defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.js"
+    integrity="sha384-JiKN5O8x9Hhs/UE5cT5AAJqieYlOZbGT3CHws/y97o3ty4R7/O5poG9F3JoiOYw1"
+    crossorigin="anonymous"></script>
+
+  
+  <script defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI"
+    crossorigin="anonymous" onload="renderMathInElement(document.body);">
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      renderMathInElement(document.body, {
+        
+      });
+    });
+  </script>
+
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

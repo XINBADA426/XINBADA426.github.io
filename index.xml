@@ -2,13 +2,241 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ming</title>
-    <link>http://xinbada426.github.io/</link>
+    <link>https://xinbada426.github.io/</link>
     <description>Recent content on Ming</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
+    <lastBuildDate>Tue, 06 Feb 2018 09:55:09 +0800</lastBuildDate>
     
-	<atom:link href="http://xinbada426.github.io/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://xinbada426.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CAZy数据库简介</title>
+      <link>https://xinbada426.github.io/post/2018-02-06/</link>
+      <pubDate>Tue, 06 Feb 2018 09:55:09 +0800</pubDate>
+      
+      <guid>https://xinbada426.github.io/post/2018-02-06/</guid>
+      
+        <description>&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/XINBADA426/GraphicBed/master/img/20200601092835.png&#34; alt=&#34;http://www.cazy.org/&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;碳水化合物活性酶数据库cazy&#34;&gt;碳水化合物活性酶数据库(CAZy)&lt;/h2&gt;
+&lt;p&gt;提供了酶分子序列的家族信息，物种来源，基因序列，蛋白序列，三维结构，EC分类，相关数据库链接……
+建立此数据库是为了将酶分子的序列、结构、催化机制相关联~&lt;/p&gt;
+&lt;h2 id=&#34;分类&#34;&gt;分类&lt;/h2&gt;
+&lt;p&gt;通过序列相似性进行家族分类，在这6个大的分类下可继续分为更为细致的亚类。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;名称&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;缩写&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;糖苷水解酶类&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;GHs&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;糖苷转移酶类&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;GTs&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;多糖裂解酶类&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;PLs&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;糖水化合物脂酶类&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;CEs&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;碳水化合物结合模块&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;CBMs&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;辅助模块酶类&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;AAs&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;名称说明&#34;&gt;名称说明&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/XINBADA426/GraphicBed/master/img20200531124908.png&#34; alt=&#34;CAZy名称说明&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;使用&#34;&gt;使用&lt;/h2&gt;
+&lt;p&gt;CAZy的&lt;a href=&#34;http://www.cazy.org/&#34;&gt;官网&lt;/a&gt;只提供了web查找的方法，如果需要本地化，需要自行爬取数据或者使用&lt;a href=&#34;http://csbl.bmb.uga.edu/dbCAN/&#34;&gt;dbCAN&lt;/a&gt;的数据.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;下载数据的&lt;a href=&#34;http://csbl.bmb.uga.edu/dbCAN/download/readme.txt&#34;&gt;说明&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>GTF/GFF文件的差异及其相互转换</title>
+      <link>https://xinbada426.github.io/post/2016-09-08/</link>
+      <pubDate>Thu, 08 Sep 2016 22:48:01 +0800</pubDate>
+      
+      <guid>https://xinbada426.github.io/post/2016-09-08/</guid>
+      
+        <description>&lt;p&gt;&lt;img src=&#34;https://upload-images.jianshu.io/upload_images/2638048-1e5af2226dcf79eb.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240&#34; alt=&#34;MyTear&#34;&gt;&lt;/p&gt;
+&lt;p&gt;我们在做生物分析的时候，经常会碰到GFF格式的文件以及GTF格式的注释文件。他们有着相似的名字，甚至连内容都极为相似~那么，他们究竟差在哪里呢？&lt;/p&gt;
+&lt;p&gt;GFF全称为&lt;code&gt;general feature format&lt;/code&gt;，这种格式主要是用来注释基因组。
+GTF全称为&lt;code&gt;gene transfer format&lt;/code&gt;，主要是用来对基因进行注释。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;数据结构&#34;&gt;数据结构&lt;/h2&gt;
+&lt;p&gt;GTF文件以及GFF文件都由9列数据组成，这两种文件的前8列都是相同的（一些小的差别）&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;1&lt;/th&gt;
+&lt;th&gt;2&lt;/th&gt;
+&lt;th&gt;3&lt;/th&gt;
+&lt;th&gt;4&lt;/th&gt;
+&lt;th&gt;5&lt;/th&gt;
+&lt;th&gt;6&lt;/th&gt;
+&lt;th&gt;7&lt;/th&gt;
+&lt;th&gt;8&lt;/th&gt;
+&lt;th&gt;9&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;reference sequence name&lt;/td&gt;
+&lt;td&gt;annotation source&lt;/td&gt;
+&lt;td&gt;feature type&lt;/td&gt;
+&lt;td&gt;start coordinate&lt;/td&gt;
+&lt;td&gt;end coordinate&lt;/td&gt;
+&lt;td&gt;score&lt;/td&gt;
+&lt;td&gt;strand&lt;/td&gt;
+&lt;td&gt;frame&lt;/td&gt;
+&lt;td&gt;attributes&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;gff&#34;&gt;GFF&lt;/h2&gt;
+&lt;p&gt;GFF文件是一种用来描述基因组特征的文件，现在我们所使用的大部分都是第三版）（GFF3）。GFF允许使用&lt;code&gt;#&lt;/code&gt;作为注释符号，例如很多GFF文件都会使用如下的两行来表明其版本其创建日期：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;##gff-version 2&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;##created 11/11/11&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;GFF文件每一列所代表的含义前面表格中有，但请注意，它的第3列&lt;code&gt;feature type&lt;/code&gt;是不受约束的，你可以使用任意的名称，但也不要太淘气~用一些适当的名称对于后面的分析会有很大的帮助。
+我们需要注意的是GFF文件的第9列，从第二版开始(GFF2)，所有的属性都以&lt;code&gt;标签=值&lt;/code&gt;的方式呈现，各个属性之间以&lt;code&gt;;&lt;/code&gt;作为分隔符&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;nv&#34;&gt;ID&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;geneAExon1&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;Name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;geneA&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;Parent&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;geneA&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;Organism&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;human
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在最新版本的GFF文件中(GFF3)，有一些是已经预先定义的属性特征，并且这些特征往往还有特殊的含义：&lt;code&gt;ID&lt;/code&gt;这个标签实在各行都要有的；另外有一个&lt;code&gt;Parent&lt;/code&gt;的属性，它表明了当前的特征是Parent特征的子集。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Contig01  PFAM  gene  &lt;span class=&#34;m&#34;&gt;501&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;750&lt;/span&gt;  .  +  &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt;  &lt;span class=&#34;nv&#34;&gt;ID&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;geneA&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;Name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;geneA
+Contig01  PFAM  exon  &lt;span class=&#34;m&#34;&gt;501&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;650&lt;/span&gt;  .  +  &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;  &lt;span class=&#34;nv&#34;&gt;ID&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;exonA1&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;Parent&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;geneA
+Contig01  PFAM  exon  &lt;span class=&#34;m&#34;&gt;700&lt;/span&gt;  &lt;span class=&#34;m&#34;&gt;750&lt;/span&gt;  .  +  &lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;  &lt;span class=&#34;nv&#34;&gt;ID&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;exonA2&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;Parent&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;geneA
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;gtf&#34;&gt;GTF&lt;/h2&gt;
+&lt;p&gt;当前所广泛使用的GTF格式为第二版(GTF2)，它主要是用来描述基因的注释。GTF格式有两个硬性标准：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;根据所使用的软件的不同，&lt;code&gt;feature types&lt;/code&gt;是必须注明的。&lt;/li&gt;
+&lt;li&gt;第9列必须以&lt;code&gt;gene_id&lt;/code&gt;以及&lt;code&gt;transcript_id&lt;/code&gt;开头
+GTF文件的第9列同GFF文件不同，虽然同样是标签与值配对的情况，但标签与值之间以空格分开，且每个特征之后都要有分号&lt;code&gt;;&lt;/code&gt;（包括最后一个特征）：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;gene_id &lt;span class=&#34;s2&#34;&gt;&amp;#34;geneA&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;transcript_id &lt;span class=&#34;s2&#34;&gt;&amp;#34;geneA.1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;database_id &lt;span class=&#34;s2&#34;&gt;&amp;#34;0012&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;modified_by &lt;span class=&#34;s2&#34;&gt;&amp;#34;Damian&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;duplicates 0&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;两种文件的差异比较&#34;&gt;两种文件的差异比较&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;列&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;GTF2&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;GFF3&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;reference sequence name&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;same&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;same&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;annotation source&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;same&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;same&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;feature type&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;feature requirements depend on software&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;can be anything&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;start coordinate&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;same&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;same&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;5. end coordinate&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;same&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;same&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;score&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;not used&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;optional&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;strand&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;same&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;same&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;frame&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;same&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;same&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;attributes&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;空格分隔&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;code&gt;=&lt;/code&gt;分隔&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;两种文件格式之间的转换&#34;&gt;两种文件格式之间的转换&lt;/h2&gt;
+&lt;p&gt;偷个懒，直接使用Cufflinks里面的工具&lt;code&gt;gffread&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#gff2gtf&lt;/span&gt;
+gffread my.gff3 -T -o my.gtf
+&lt;span class=&#34;c1&#34;&gt;#gtf2gff&lt;/span&gt;
+gffread merged.gtf -o- &amp;gt; merged.gff3
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;&lt;a href=&#34;http://blog.nextgenetics.net/?e=27&#34;&gt;参考（可能需要梯子）&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+</description>
+      
+    </item>
     
   </channel>
 </rss>
