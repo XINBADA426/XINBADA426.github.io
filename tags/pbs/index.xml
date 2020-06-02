@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PBS on Ming</title>
+    <link>https://xinbada426.github.io/tags/pbs/</link>
+    <description>Recent content in PBS on Ming</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 01 Jun 2020 11:00:26 +0800</lastBuildDate>
+    
+	<atom:link href="https://xinbada426.github.io/tags/pbs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>PBS作业投递系统使用</title>
+      <link>https://xinbada426.github.io/post/2020-06-01/</link>
+      <pubDate>Mon, 01 Jun 2020 11:00:26 +0800</pubDate>
+      
+      <guid>https://xinbada426.github.io/post/2020-06-01/</guid>
+      <description>系统架构 计算节点共有5台曙光I840-G30四路服务器。每台服务器配置4颗20核Intel Xeon 6248 2.5GHz处理器，1536G DDR4内存。 G</description>
+    </item>
+    
+  </channel>
+</rss>
