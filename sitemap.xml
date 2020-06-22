@@ -1,102 +1,60 @@
-<?xml-stylesheet type="text/xsl" href="https://xinbada426.github.io/sitemap.xsl"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
-  <url>
-    <loc>https://xinbada426.github.io/categories/</loc>
-    <lastmod>2020-06-01T11:00:26+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://xinbada426.github.io/</loc>
-    <lastmod>2020-06-01T11:00:26+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://xinbada426.github.io/categories/others/</loc>
-    <lastmod>2020-06-01T11:00:26+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://xinbada426.github.io/tags/pbs/</loc>
-    <lastmod>2020-06-01T11:00:26+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://xinbada426.github.io/post/2020-06-01/</loc>
-    <lastmod>2020-06-01T11:00:26+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://xinbada426.github.io/post/</loc>
-    <lastmod>2020-06-01T11:00:26+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://xinbada426.github.io/tags/</loc>
-    <lastmod>2020-06-01T11:00:26+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://xinbada426.github.io/categories/bioinformation/</loc>
-    <lastmod>2018-02-06T09:55:09+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://xinbada426.github.io/tags/cazy/</loc>
-    <lastmod>2018-02-06T09:55:09+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://xinbada426.github.io/post/2018-02-06/</loc>
-    <lastmod>2018-02-06T09:55:09+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://xinbada426.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    <lastmod>2018-02-06T09:55:09+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://xinbada426.github.io/tags/gff/</loc>
-    <lastmod>2016-09-08T22:48:01+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://xinbada426.github.io/tags/gtf/</loc>
-    <lastmod>2016-09-08T22:48:01+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://xinbada426.github.io/post/2016-09-08/</loc>
-    <lastmod>2016-09-08T22:48:01+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-</urlset>
+<search>
+    
+     <entry>
+        <title>PBS作业投递系统使用</title>
+        <url>https://xinbada426.github.io/post/2020-06-01/</url>
+        <categories>
+          <category>Others</category>
+        </categories>
+        <tags>
+          <tag>PBS</tag>
+        </tags>
+        <content type="html"> 系统架构  计算节点共有5台曙光I840-G30四路服务器。每台服务器配置4颗20核Intel Xeon 6248 2.5GHz处理器，1536G DDR4内存。 GPU计算节点为1台曙光X745-G30双路服务器。配置2颗20核Intel Xeon 6230 2.1GHz处理器，256G DDR3内存，4张GeForce RTX 2080 Ti显卡。 存储系统采用lustre文件系统，使用一台曙光I620-G30作为元数据服务器，两台曙光S640-G30作为数据服务器，系统提供260T可用空间，为集群系统提供高效、稳定读写性能和存储资源的灵活快速的部署能力。 系统配置管理节点1台，型号为曙光I620-G30双路服务器，部署曙光Gridview 4.0集群管理系统。用户可通过IP地址实现Web访问。 系统配置登录节点1台，型号为曙光I620-G30双路服务器，用户可从内网直接登录该节点实现作业提交、编译程序等。 系统配置1套互联的万兆光纤以太网作为管理网络，配置1套100Gb Infiniband高速网络作为计算网路。 硬件整体架构采用冗余设备或部件，保证设备、部件、链路的高可用性及数据读写、传输的稳定可靠进。  作业调度常用命令 获取所有的节点信息（qhost） /opt/gridview/pbs/dispatcher/bin/lsf_cmd/listhosts
+获取所有队列信息（qqueue） /opt/gridview/pbs/dispatcher/bin/lsf_cmd/listqueues
+获取所有任务信息(qa) /opt/gridview/pbs/dispatcher/bin/lsf_cmd/listjobs
+获取我的任务信息（qs） /opt/gridview/pbs/dispatcher/bin/qstat
+任务投递（qsub） /opt/gridview/pbs/dispatcher/bin/qsub
+1 2 3 4  # 投递任务到指定节点 qsub -l nodes=node3 t.sh # 投递任务到指定队列 qsub -q middle t.sh   常用目录 管理员软件安装目录 /public/software/
+我的软件安装目录 /public/home/guest/softwares
+PBS安装目录 /opt/gridview/pbs/dispatcher/bin
+</content>
+    </entry>
+    
+     <entry>
+        <title>CAZy数据库简介</title>
+        <url>https://xinbada426.github.io/post/2018-02-06/</url>
+        <categories>
+          <category>bioinformation</category>
+        </categories>
+        <tags>
+          <tag>数据库</tag><tag>CAZy</tag>
+        </tags>
+        <content type="html"> 碳水化合物活性酶数据库(CAZy) 提供了酶分子序列的家族信息，物种来源，基因序列，蛋白序列，三维结构，EC分类，相关数据库链接…… 建立此数据库是为了将酶分子的序列、结构、催化机制相关联~
+分类 通过序列相似性进行家族分类，在这6个大的分类下可继续分为更为细致的亚类。
+   名称 缩写     糖苷水解酶类 GHs   糖苷转移酶类 GTs   多糖裂解酶类 PLs   糖水化合物脂酶类 CEs   碳水化合物结合模块 CBMs   辅助模块酶类 AAs    名称说明 使用 CAZy的官网只提供了web查找的方法，如果需要本地化，需要自行爬取数据或者使用dbCAN的数据.
+下载数据的说明
+</content>
+    </entry>
+    
+     <entry>
+        <title>GTF/GFF文件的差异及其相互转换</title>
+        <url>https://xinbada426.github.io/post/2016-09-08/</url>
+        <categories>
+          <category>bioinformation</category>
+        </categories>
+        <tags>
+          <tag>gtf</tag><tag>gff</tag>
+        </tags>
+        <content type="html"> 我们在做生物分析的时候，经常会碰到GFF格式的文件以及GTF格式的注释文件。他们有着相似的名字，甚至连内容都极为相似~那么，他们究竟差在哪里呢？
+GFF全称为general feature format，这种格式主要是用来注释基因组。 GTF全称为gene transfer format，主要是用来对基因进行注释。
+ 数据结构 GTF文件以及GFF文件都由9列数据组成，这两种文件的前8列都是相同的（一些小的差别）
+   列 内容     1 reference sequence name   2 annotation source   3 feature type   4 start coordinate   5 end coordinate   6 score   7 strand   8 frame   9 attributes    GFF GFF文件是一种用来描述基因组特征的文件，现在我们所使用的大部分都是第三版）（GFF3）。GFF允许使用#作为注释符号，例如很多GFF文件都会使用如下的两行来表明其版本其创建日期：
+1 2  ##gff-version 2 ##created 11/11/11   GFF文件每一列所代表的含义前面表格中有，但请注意，它的第3列feature type是不受约束的，你可以使用任意的名称，但也不要太淘气~用一些适当的名称对于后面的分析会有很大的帮助。 我们需要注意的是GFF文件的第9列，从第二版开始(GFF2)，所有的属性都以标签=值的方式呈现，各个属性之间以;作为分隔符
+1  ID=geneAExon1;Name=geneA;Parent=geneA;Organism=human   在最新版本的GFF文件中(GFF3)，有一些是已经预先定义的属性特征，并且这些特征往往还有特殊的含义：ID这个标签实在各行都要有的；另外有一个Parent的属性，它表明了当前的特征是Parent特征的子集。
+1 2 3  Contig01 PFAM gene 501 750 . &#43; 0 ID=geneA;Name=geneA Contig01 PFAM exon 501 650 . &#43; 2 ID=exonA1;Parent=geneA Contig01 PFAM exon 700 750 . &#43; 2 ID=exonA2;Parent=geneA   GTF 当前所广泛使用的GTF格式为第二版(GTF2)，它主要是用来描述基因的注释。GTF格式有两个硬性标准：
+ 根据所使用的软件的不同，feature types是必须注明的。 第9列必须以gene_id以及transcript_id开头 GTF文件的第9列同GFF文件不同，虽然同样是标签与值配对的情况，但标签与值之间以空格分开，且每个特征之后都要有分号;（包括最后一个特征）：  1  gene_id &amp;#34;geneA&amp;#34;;transcript_id &amp;#34;geneA.1&amp;#34;;database_id &amp;#34;0012&amp;#34;;modified_by &amp;#34;Damian&amp;#34;;duplicates 0;   两种文件的差异比较    列 GTF2 GFF3     reference sequence name same same   annotation source same same   feature type feature requirements depend on software can be anything   start coordinate same same   5. end coordinate same same   score not used optional   strand same same   frame same same   attributes 空格分隔 =分隔    两种文件格式之间的转换 偷个懒，直接使用Cufflinks里面的工具gffread
+1 2 3 4  #gff2gtf gffread my.gff3 -T -o my.gtf #gtf2gff gffread merged.gtf -o- &amp;gt; merged.gff3    参考（可能需要梯子）
+</content>
+    </entry>
+    
+</search>

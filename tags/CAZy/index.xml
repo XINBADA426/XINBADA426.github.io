@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CAZy on Ming</title>
+    <link>https://xinbada426.github.io/tags/CAZy/</link>
+    <description>Recent content in CAZy on Ming</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 06 Feb 2018 09:55:09 +0800</lastBuildDate>
+    
+	<atom:link href="https://xinbada426.github.io/tags/CAZy/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>CAZy数据库简介</title>
+      <link>https://xinbada426.github.io/post/2018-02-06/</link>
+      <pubDate>Tue, 06 Feb 2018 09:55:09 +0800</pubDate>
+      
+      <guid>https://xinbada426.github.io/post/2018-02-06/</guid>
+      <description>碳水化合物活性酶数据库(CAZy) 提供了酶分子序列的家族信息，物种来源，基因序列，蛋白序列，三维结构，EC分类，相关数据库链接…… 建立此数据</description>
+    </item>
+    
+  </channel>
+</rss>
