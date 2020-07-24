@@ -1,6 +1,22 @@
 <search>
     
      <entry>
+        <title>Blast2GO 本地化</title>
+        <url>https://xinbada426.github.io/post/2020-07-23/</url>
+        <categories>
+          <category>bioinformation</category>
+        </categories>
+        <tags>
+          <tag>Blast2GO</tag><tag>数据库</tag>
+        </tags>
+        <content type="html"> 准备 Linux版本信息 1 2  #&amp;gt; cat /etc/redhat-release CentOS Linux release 7.7.1908 (Core)   mysql 如果你从未使用过mysql
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24  # 下载源 #&amp;gt; wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm # 安装源 #&amp;gt; rpm -ivh mysql-community-release-el7-5.noarch.rpm # 安装 #&amp;gt; yum install -y mysql-server # 查看版本信息 #&amp;gt; mysql -V mysql Ver 14.14 Distrib 5.6.49, for Linux (x86_64) using EditLine wrapper # 启动mysql服务 #&amp;gt; systemctl start mysqld # 设定mysql root密码 #&amp;gt; /usr/bin/mysqladmin -u root password &amp;#39;your password&amp;#39; # 查看状态 #&amp;gt; systemctl status mysqld # 设定开机启动 #&amp;gt; systemctl enable mysqld   Java 没有使用网上推荐的 JDK 6，7，各个步骤正常
+1 2 3 4  $&amp;gt; java -version openjdk version &amp;#34;1.8.0_242&amp;#34; OpenJDK Runtime Environment (build 1.8.0_242-b08) OpenJDK 64-Bit Server VM (build 25.242-b08, mixed mode)   Data  gene2accession.gz gene_info.gz idmapping.tb.gz godatabase  b2g4pipe b2g4pipe_v2.5.zip 提取码：6p3s
+local_b2g_db local_b2g_db.tar.bz2 提取码：drb9
+数据库安装 创建b2g数据库并初始化各个表 1 2 3 4 5 6 7 8 9 10 11 12  # 创建 `gene2accession` `gene_info` `gi2uniprot` 这三个表 #&amp;gt; mysql -uroot -p &amp;lt; b2gdb.sql # 利用 go_monthly-assocdb 创建其它的表 # `assoc_rel` `association` `association_isoform` `association_property` `association_qualifier` `association_species_qualifier` `db` `dbxref` `evidence` `evidence_dbxref` `gene_product` `gene_product_ancestor` `gene_product_count` `gene_product_dbxref` `gene_product_homology` `gene_product_homolset` `gene_product_phylotree` `gene_product_property` `gene_product_seq` `gene_product_subset` `gene_product_synonym` `graph_path` `graph_path2term` `homolset` `instance_data` `intersection_of` `phylotree` `phylotree_property` `relation_composition``relation_properties` `seq` `seq_dbxref` `seq_property` `source_audit` `species` `term` `term2term` `term2term_metadata` `term_audit` `term_dbxref` `term_definition` `term_property` `term_subset` `term_synonym` #&amp;gt; mysql -uroot -p b2g &amp;lt; go_monthly-assocdb-data # 将文件 gene2accession 导入 表 `gene2accession` #&amp;gt; mysql -uroot -p b2g -e&amp;#34;LOAD DATA LOCAL INFILE &amp;#39;gene2accession&amp;#39; INTO TABLE gene2accession FIELDS TERMINATED BY &amp;#39;\t&amp;#39; LINES TERMINATED BY &amp;#39;\n&amp;#39;;&amp;#34; # 导入各种id映射关系 #&amp;gt; java -cp .:mysql-connector-java-5.0.8-bin.jar: ImportIdMapping idmapping.tb localhost b2g blast2go blast4it   示例运行  解压 b2g4pipe-2.5.0 并进入文件夹 修改 b2gPipe.properties 内的数据库信息如下（同在 b2gdb.sql 的构建数据库时的信息）  1 2 3 4 5  // GO and B2G Data Access Basic Dbacces.dbname=b2g Dbacces.dbhost=localhost Dbacces.dbuser=blast2go Dbacces.dbpasswd=blast4it   运行目录下的 runPipeExample.sh  已知问题  go_monthly-assocdb-data.gz这个文件最后的更新是2017年1月 数据库太大，我用来测试的破机子硬盘还是有点压力的  参考  本地Blast2GO安装，及其数据库更新和导入数据中断的解决方案-  </content>
+    </entry>
+    
+     <entry>
         <title>PBS作业投递系统使用</title>
         <url>https://xinbada426.github.io/post/2020-06-01/</url>
         <categories>
