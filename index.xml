@@ -6,10 +6,19 @@
     <description>Recent content on Ming</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 17 Aug 2020 22:19:22 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 18 Aug 2020 22:02:40 +0800</lastBuildDate>
     
 	<atom:link href="https://xinbada426.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>如何将表格文件转为 sqlite3 数据库文件</title>
+      <link>https://xinbada426.github.io/post/2020-08-18/</link>
+      <pubDate>Tue, 18 Aug 2020 22:02:40 +0800</pubDate>
+      
+      <guid>https://xinbada426.github.io/post/2020-08-18/</guid>
+      <description>平时工作中碰到的需求，需要将 tsv/csv 文件转为 sqlite3 数据库文件，本来一直想用 python 的数据库接口来实现这一目的，但经在网上的搜索，发现直接使用 sqlite3 的点命令更为方</description>
+    </item>
     
     <item>
       <title>HUGO 备忘</title>
@@ -45,15 +54,6 @@
       
       <guid>https://xinbada426.github.io/post/2020-06-01/</guid>
       <description>系统架构 计算节点共有5台曙光I840-G30四路服务器。每台服务器配置4颗20核Intel Xeon 6248 2.5GHz处理器，1536G DDR4内存。 G</description>
-    </item>
-    
-    <item>
-      <title>_Dummy</title>
-      <link>https://xinbada426.github.io/index/_dummy/</link>
-      <pubDate>Sat, 30 May 2020 10:10:19 +0800</pubDate>
-      
-      <guid>https://xinbada426.github.io/index/_dummy/</guid>
-      <description></description>
     </item>
     
   </channel>

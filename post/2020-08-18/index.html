@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
-    <title>CAZy数据库简介 - Ming</title>
+    <title>如何将表格文件转为 sqlite3 数据库文件 - Ming</title>
     <meta name="keywords" content="Bioinfomatic">
     
-    <meta property="og:title" content="CAZy数据库简介">
+    <meta property="og:title" content="如何将表格文件转为 sqlite3 数据库文件">
     <meta property="og:site_name" content="Ming">
     <meta property="og:image" content="/img/author.jpg"> 
-    <meta name="title" content="CAZy数据库简介 - Ming" />
+    <meta name="title" content="如何将表格文件转为 sqlite3 数据库文件 - Ming" />
     <meta name="description" content="物无非彼，物无非是。自彼则不见，自是则知之。"> 
     <link rel="shortcut icon" href="https://xinbada426.github.io/img/favicon.ico" />
     <link rel="apple-touch-icon" href="https://xinbada426.github.io/img/apple-touch-icon.png" />
@@ -103,8 +103,8 @@
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
       <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link" href="https://xinbada426.github.io/post/2018-02-06/" itemprop="url">
-        CAZy数据库简介
+        <a class="post-title-link" href="https://xinbada426.github.io/post/2020-08-18/" itemprop="url">
+        如何将表格文件转为 sqlite3 数据库文件
         </a>
       </h1>
       <div class="post-meta">
@@ -113,8 +113,8 @@
     <i class="fa fa-calendar-o"></i>
 </span>
 <span class="post-meta-item-text"></span>
-<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2018-02-06">
-    2018-02-06
+<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2020-08-18">
+    2020-08-18
 </time>
 </span> 
       
@@ -127,8 +127,8 @@
   <span class="post-meta-item-text"></span>
   
     <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-      <a href="https://xinbada426.github.io/categories/bioinformation" itemprop="url" rel="index">
-        <span itemprop="name">bioinformation</span>
+      <a href="https://xinbada426.github.io/categories/Others" itemprop="url" rel="index">
+        <span itemprop="name">Others</span>
       </a>
       &nbsp; 
     </span>
@@ -147,51 +147,112 @@
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    <p><img src="https://raw.githubusercontent.com/XINBADA426/GraphicBed/master/img/20200601092835.png" alt="http://www.cazy.org/"></p>
-<h2 id="碳水化合物活性酶数据库cazy">碳水化合物活性酶数据库(CAZy)</h2>
-<p>提供了酶分子序列的家族信息，物种来源，基因序列，蛋白序列，三维结构，EC分类，相关数据库链接……
-建立此数据库是为了将酶分子的序列、结构、催化机制相关联~</p>
-<h2 id="分类">分类</h2>
-<p>通过序列相似性进行家族分类，在这6个大的分类下可继续分为更为细致的亚类。</p>
-<table>
-<thead>
-<tr>
-<th align="center">名称</th>
-<th align="center">缩写</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">糖苷水解酶类</td>
-<td align="center">GHs</td>
-</tr>
-<tr>
-<td align="center">糖苷转移酶类</td>
-<td align="center">GTs</td>
-</tr>
-<tr>
-<td align="center">多糖裂解酶类</td>
-<td align="center">PLs</td>
-</tr>
-<tr>
-<td align="center">糖水化合物脂酶类</td>
-<td align="center">CEs</td>
-</tr>
-<tr>
-<td align="center">碳水化合物结合模块</td>
-<td align="center">CBMs</td>
-</tr>
-<tr>
-<td align="center">辅助模块酶类</td>
-<td align="center">AAs</td>
-</tr>
-</tbody>
-</table>
-<h2 id="名称说明">名称说明</h2>
-<p><img src="https://raw.githubusercontent.com/XINBADA426/GraphicBed/master/img20200531124908.png" alt="CAZy名称说明"></p>
-<h2 id="使用">使用</h2>
-<p>CAZy的<a href="http://www.cazy.org/">官网</a>只提供了web查找的方法，如果需要本地化，需要自行爬取数据或者使用<a href="http://csbl.bmb.uga.edu/dbCAN/">dbCAN</a>的数据.</p>
-<p><em>下载数据的<a href="http://csbl.bmb.uga.edu/dbCAN/download/readme.txt">说明</a></em></p>
+    <p><img src="https://cdn.jsdelivr.net/gh/XINBADA426/GraphicBed/img/sqlite.png" alt="sqlite3"></p>
+<blockquote>
+<p>平时工作中碰到的需求，需要将 tsv/csv 文件转为 sqlite3 数据库文件，本来一直想用 python 的数据库接口来实现这一目的，但经在网上的搜索，发现直接使用 sqlite3 的点命令更为方便，特此记录。</p>
+</blockquote>
+<h2 id="数据准备">数据准备</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="k">for</span> i in <span class="o">{</span>1..10<span class="o">}</span><span class="p">;</span><span class="k">do</span> <span class="nb">echo</span> -e <span class="s2">&#34;</span><span class="nv">$i</span><span class="s2">\t</span><span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">;</span><span class="k">done</span> &gt; test.tsv
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="数据库生成">数据库生成</h2>
+<ol>
+<li>连接数据库</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 如果没有 test.db, 则会自动生成</span>
+sqlite3 test.db
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>使用 sqlite3 的点命令生成表</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-SQL" data-lang="SQL"><span class="o">#</span> <span class="err">查看数据库内已有的</span> <span class="k">table</span>
+<span class="p">.</span><span class="n">tables</span>
+
+<span class="o">#</span> <span class="err">设定为制表符输出</span>
+<span class="p">.</span><span class="k">mode</span> <span class="n">tabs</span>
+
+<span class="o">#</span> <span class="err">有头，首行将作为</span> <span class="n">headr</span><span class="err">，把表格导入名为</span> <span class="n">head</span> <span class="err">的</span> <span class="k">table</span> <span class="err">中</span>
+<span class="p">.</span><span class="n">import</span> <span class="n">test</span><span class="p">.</span><span class="n">tsv</span> <span class="n">head</span>
+<span class="o">#</span> <span class="err">查看</span> <span class="n">header</span>
+<span class="p">.</span><span class="k">schema</span> <span class="n">head</span>
+<span class="o">#</span> <span class="err">查看前</span><span class="mi">5</span><span class="err">行</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">head</span> <span class="k">LIMIT</span> <span class="mi">5</span><span class="p">;</span>
+<span class="o">#</span> <span class="mi">2</span>	<span class="mi">2</span><span class="n">_2</span>
+<span class="o">#</span> <span class="mi">3</span>	<span class="mi">3</span><span class="n">_3</span>
+<span class="o">#</span> <span class="mi">4</span>	<span class="mi">4</span><span class="n">_4</span>
+<span class="o">#</span> <span class="mi">5</span>	<span class="mi">5</span><span class="n">_5</span>
+<span class="o">#</span> <span class="mi">6</span>	<span class="mi">6</span><span class="n">_6</span>
+
+
+<span class="o">#</span> <span class="err">无头，把表格导入名为</span> <span class="n">nohead</span> <span class="err">的</span> <span class="k">table</span> <span class="err">中</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">nohead</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">);</span>
+<span class="p">.</span><span class="n">import</span> <span class="n">test</span><span class="p">.</span><span class="n">tsv</span> <span class="n">nohead</span>
+<span class="o">#</span> <span class="err">查看</span> <span class="n">header</span>
+<span class="p">.</span><span class="k">schema</span> <span class="n">nohead</span>
+<span class="o">#</span> <span class="err">查看前</span><span class="mi">5</span><span class="err">行</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">nohead</span> <span class="k">LIMIT</span> <span class="mi">5</span><span class="p">;</span>
+<span class="o">#</span> <span class="mi">1</span>	<span class="mi">1</span><span class="n">_1</span>
+<span class="o">#</span> <span class="mi">2</span>	<span class="mi">2</span><span class="n">_2</span>
+<span class="o">#</span> <span class="mi">3</span>	<span class="mi">3</span><span class="n">_3</span>
+<span class="o">#</span> <span class="mi">4</span>	<span class="mi">4</span><span class="n">_4</span>
+<span class="o">#</span> <span class="mi">5</span>	<span class="mi">5</span><span class="n">_5</span>
+
+<span class="o">#</span> <span class="err">退出数据库</span>
+<span class="p">.</span><span class="n">quit</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="备注">备注</h2>
+<p>常用的点命令可使用 <code>.help</code> 查询，<code>.help command</code>可查看某一点命令的具体使用方法</p>
 
     </div>
     <footer class="post-footer">
@@ -201,7 +262,7 @@
      
     <a href="https://xinbada426.github.io/tags/%e6%95%b0%e6%8d%ae%e5%ba%93" rel="tag" title="数据库">#数据库#</a>
     
-    <a href="https://xinbada426.github.io/tags/cazy" rel="tag" title="CAZy">#CAZy#</a>
+    <a href="https://xinbada426.github.io/tags/sql" rel="tag" title="SQL">#SQL#</a>
     
 </div>
 
@@ -210,16 +271,12 @@
      <div class="post-nav">
     <div class="post-nav-next post-nav-item">
     
-        <a href="https://xinbada426.github.io/index/_dummy/" rel="next" title="_Dummy">
-        <i class="fa fa-chevron-left"></i> _Dummy
-        </a>
-    
     </div>
 
     <div class="post-nav-prev post-nav-item">
     
-        <a href="https://xinbada426.github.io/post/2016-09-08/" rel="prev" title="GTF/GFF文件的差异及其相互转换">
-        GTF/GFF文件的差异及其相互转换 <i class="fa fa-chevron-right"></i>
+        <a href="https://xinbada426.github.io/post/2020-08-17/" rel="prev" title="HUGO 备忘">
+        HUGO 备忘 <i class="fa fa-chevron-right"></i>
         </a>
     
     </div>
@@ -248,7 +305,16 @@
 <aside id="sidebar" class="sidebar">
   <div class="sidebar-inner">
 
-    <section class="site-overview sidebar-panel  sidebar-panel-active ">
+  <ul class="sidebar-nav motion-element">
+    <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+      
+    </li>
+    <li class="sidebar-nav-overview" data-target="site-overview">
+      
+    </li>
+  </ul>
+
+    <section class="site-overview sidebar-panel ">
       <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image"
         src="https://xinbada426.github.io/img/one_punch_man.jpeg"
@@ -308,6 +374,18 @@
 
     </section>
     
+<section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+    <div class="post-toc">
+        <div class="post-toc-content"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#数据准备">数据准备</a></li>
+    <li><a href="#数据库生成">数据库生成</a></li>
+    <li><a href="#备注">备注</a></li>
+  </ul>
+</nav></div>
+    </div>
+</section>
+
   </div>
 </aside>
 
