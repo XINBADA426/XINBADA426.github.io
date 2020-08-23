@@ -1,6 +1,21 @@
 <search>
     
      <entry>
+        <title>Centos7 中各种国内源的配置</title>
+        <url>https://xinbada426.github.io/post/2020-08-23/</url>
+        <categories>
+          <category>Linux</category>
+        </categories>
+        <tags>
+          <tag>Centos7</tag><tag>镜像</tag>
+        </tags>
+        <content type="html">  由于国内网络环境的原因，CentOS7 下各种软件更新、安装速度可能会非常非常非常慢，好在一般都有国内的镜像源可以替代，这里记录我常用的各种源的配置，便于以后查找。
+ yum 源 yum 源的配置当然需要 root 权限啦~请做好备份
+ 修改 /etc/yum/pluginconf.d/fastestmirror.conf 内 enabled=0, 关闭 yum-fastestmirror 插件（如果有的话） 修改配置文件，清华大学 yum 源网页上的说明已经超级详细了，按照操作来就好。  Anaconda 源 Anaconda 镜像使用帮助
+ 修改主目录下的 .condarc 文件（channel_alias 同网站的不一样）  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17  channels: - defaults show_channel_urls: true channel_alias: https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs default_channels: - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/pro - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2 custom_channels: conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud   conda clean -i 清除索引  </content>
+    </entry>
+    
+     <entry>
         <title>如何将表格文件转为 sqlite3 数据库文件</title>
         <url>https://xinbada426.github.io/post/2020-08-18/</url>
         <categories>

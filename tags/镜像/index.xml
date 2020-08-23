@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>镜像 on Ming</title>
+    <link>https://xinbada426.github.io/tags/%E9%95%9C%E5%83%8F/</link>
+    <description>Recent content in 镜像 on Ming</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 23 Aug 2020 15:45:41 +0800</lastBuildDate>
+    
+	<atom:link href="https://xinbada426.github.io/tags/%E9%95%9C%E5%83%8F/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Centos7 中各种国内源的配置</title>
+      <link>https://xinbada426.github.io/post/2020-08-23/</link>
+      <pubDate>Sun, 23 Aug 2020 15:45:41 +0800</pubDate>
+      
+      <guid>https://xinbada426.github.io/post/2020-08-23/</guid>
+      <description>由于国内网络环境的原因，CentOS7 下各种软件更新、安装速度可能会非常非常非常慢，好在一般都有国内的镜像源可以替代，这里记录我常用的各种源</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -4,19 +4,19 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
-    <title>Blast2GO - Ming</title>
+    <title>Centos7 中各种国内源的配置 - Ming</title>
     <meta name="keywords" content="Bioinfomatic">
     
-    <meta property="og:title" content="Blast2GO">
+    <meta property="og:title" content="Centos7 中各种国内源的配置">
     <meta property="og:site_name" content="Ming">
     <meta property="og:image" content="/img/author.jpg"> 
-    <meta name="title" content="Blast2GO - Ming" />
+    <meta name="title" content="Centos7 中各种国内源的配置 - Ming" />
     <meta name="description" content="物无非彼，物无非是。自彼则不见，自是则知之。"> 
     <link rel="shortcut icon" href="https://xinbada426.github.io/img/favicon.ico" />
     <link rel="apple-touch-icon" href="https://xinbada426.github.io/img/apple-touch-icon.png" />
     <link rel="apple-touch-icon-precomposed" href="https://xinbada426.github.io/img/apple-touch-icon.png" />
     <link href="https://xinbada426.github.io/js/vendor/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-    
+    <link href="https://xinbada426.github.io/js/vendor/fancybox/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
     <link href="https://xinbada426.github.io/css/main.css" rel="stylesheet" type="text/css" />
     <link href="https://xinbada426.github.io/css/syntax.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" id="hexo.configuration">
@@ -24,13 +24,13 @@
   var CONFIG = {
     scheme: 'Pisces',
     sidebar: {"position":"left","display":"post"},
-    fancybox: false, 
+     fancybox: true, 
     motion: true
   };
 </script>
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-<div class="container one-collumn sidebar-position-left   ">
+<div class="container one-collumn sidebar-position-left page-home  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -99,71 +99,151 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-<section id="posts" class="posts-collapse">
-<div class="collection-title">
-    <h2 >Blast2GO
-    <small></small>
-    </h2>
-</div>
-
-<div class="collection-title">
-  <h2 class="archive-year motion-element" id="archive-year-2020">2020</h2>
-</div>
-
-  <article class="post post-type-normal }}" itemscope itemtype="http://schema.org/Article">
+<section id="posts" class="posts-expand">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
-      <h1 class="post-title">
-        <a class="post-title-link" href="https://xinbada426.github.io/post/2020-07-23/" itemprop="url">
-            <span itemprop="name">Blast2GO 本地化</span>
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link" href="https://xinbada426.github.io/post/2020-08-23/" itemprop="url">
+        Centos7 中各种国内源的配置
         </a>
       </h1>
-
       <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-07-24"
-              content="07-24" >
-          07-24
-        </time>
+      <span class="post-time">
+<span class="post-meta-item-icon">
+    <i class="fa fa-calendar-o"></i>
+</span>
+<span class="post-meta-item-text"></span>
+<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2020-08-23">
+    2020-08-23
+</time>
+</span> 
+      
+
+  <span class="post-category" >
+  &nbsp; | &nbsp;
+  <span class="post-meta-item-icon">
+    <i class="fa fa-folder-o"></i>
+  </span>
+  <span class="post-meta-item-text"></span>
+  
+    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+      <a href="https://xinbada426.github.io/categories/Linux" itemprop="url" rel="index">
+        <span itemprop="name">Linux</span>
+      </a>
+      &nbsp; 
+    </span>
+  
+</span>
+
+
+       <span>
+&nbsp; | &nbsp;
+<span class="post-meta-item-icon">
+    <i class="fa fa-eye"></i>
+</span>
+<span class="post-meta-item-text"></span>
+<span class="leancloud-visitors-count"></span>
+</span>
       </div>
     </header>
+    <div class="post-body" itemprop="articleBody">
+    <p><img src="https://cdn.jsdelivr.net/gh/XINBADA426/GraphicBed/img/Centos7.png" alt="CentOS7"></p>
+<blockquote>
+<p>由于国内网络环境的原因，CentOS7 下各种软件更新、安装速度可能会非常非常非常慢，好在一般都有国内的镜像源可以替代，这里记录我常用的各种源的配置，便于以后查找。</p>
+</blockquote>
+<h2 id="yum-源">yum 源</h2>
+<p><em>yum 源的配置当然需要 root 权限啦~请做好备份</em></p>
+<ol>
+<li>修改 <code>/etc/yum/pluginconf.d/fastestmirror.conf</code> 内 <code>enabled=0</code>, 关闭 yum-fastestmirror 插件（如果有的话）</li>
+<li>修改配置文件，<a href="https://mirrors.cnnic.cn/help/centos/">清华大学 yum 源</a>网页上的说明已经超级详细了，按照操作来就好。</li>
+</ol>
+<h2 id="anaconda-源">Anaconda 源</h2>
+<p><a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/">Anaconda 镜像使用帮助</a></p>
+<ol>
+<li>修改主目录下的 <code>.condarc</code> 文件（<em><code>channel_alias</code> 同网站的不一样</em>）</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">channels:
+  - defaults
+show_channel_urls: <span class="nb">true</span>
+channel_alias: https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs
+default_channels:
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/pro
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
+custom_channels:
+  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li><code>conda clean -i</code> 清除索引</li>
+</ol>
+
+    </div>
+    <footer class="post-footer">
+     
+ 
+<div class="post-tags">     
+     
+    <a href="https://xinbada426.github.io/tags/centos7" rel="tag" title="Centos7">#Centos7#</a>
+    
+    <a href="https://xinbada426.github.io/tags/%e9%95%9c%e5%83%8f" rel="tag" title="镜像">#镜像#</a>
+    
+</div>
+
+
+
+     <div class="post-nav">
+    <div class="post-nav-next post-nav-item">
+    
+    </div>
+
+    <div class="post-nav-prev post-nav-item">
+    
+        <a href="https://xinbada426.github.io/post/2020-08-18/" rel="prev" title="如何将表格文件转为 sqlite3 数据库文件">
+        如何将表格文件转为 sqlite3 数据库文件 <i class="fa fa-chevron-right"></i>
+        </a>
+    
+    </div>
+</div>
+      
+     
+     
+     
+
+
+
+
+    </footer>
   </article>
-
-
- </section>
-
-
-
-
-
-
-
-
-
-  
-  
-
-
-
-
-
-
-  
-  
-
-
-
-<nav class="pagination">
-    
-    
-        
-        
-          <span class="page-number current">1</span>
-        
-        
-    
-    
-</nav>
-
+</section>
 
           </div>
         </div>
@@ -177,7 +257,16 @@
 <aside id="sidebar" class="sidebar">
   <div class="sidebar-inner">
 
-    <section class="site-overview sidebar-panel  sidebar-panel-active ">
+  <ul class="sidebar-nav motion-element">
+    <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+      
+    </li>
+    <li class="sidebar-nav-overview" data-target="site-overview">
+      
+    </li>
+  </ul>
+
+    <section class="site-overview sidebar-panel ">
       <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image"
         src="https://xinbada426.github.io/img/one_punch_man.jpeg"
@@ -213,13 +302,6 @@
     </div>
 </nav>
       
-<div class="feed-link motion-element">
-<a href="https://xinbada426.github.io/tags/Blast2GO/index.xml" rel="alternate" type="application/rss+xml" target="_blank">
-    <i class="fa fa-rss"></i>
-    
-</a>
-</div>
-
       
 <div class="links-of-author motion-element">
     
@@ -244,6 +326,17 @@
 
     </section>
     
+<section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+    <div class="post-toc">
+        <div class="post-toc-content"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#yum-源">yum 源</a></li>
+    <li><a href="#anaconda-源">Anaconda 源</a></li>
+  </ul>
+</nav></div>
+    </div>
+</section>
+
   </div>
 </aside>
 
@@ -290,16 +383,18 @@
 <script type="text/javascript" src="https://xinbada426.github.io/js/vendor/velocity/velocity.ui.min.js?v=1.2.1"></script>
 <script src="https://xinbada426.github.io/js/vendor/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
 
+<script src="https://xinbada426.github.io/js/vendor/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+
 <script type="text/javascript" src="https://xinbada426.github.io/js/utils.js"></script>
 <script type="text/javascript" src="https://xinbada426.github.io/js/motion.js"></script>
 <script type="text/javascript" src="https://xinbada426.github.io/js/affix.js"></script>
 <script type="text/javascript" src="https://xinbada426.github.io/js/schemes/pisces.js"></script>
 
-<script type="text/javascript" src="https://xinbada426.github.io/js/bootstrap.js"></script>
+<script type="text/javascript" src="https://xinbada426.github.io/js/scrollspy.js"></script>
+<script type="text/javascript" src="https://xinbada426.github.io/js/post-details.js"></script>
+<script type="text/javascript" src="https://xinbada426.github.io/js/toc.js"></script>
 
-<script type="text/javascript" id="motion.page.archive">
-  $('.archive-year').velocity('transition.slideLeftIn');
-</script>
+<script type="text/javascript" src="https://xinbada426.github.io/js/bootstrap.js"></script>
 
 <script type="text/javascript" src="https://xinbada426.github.io/js/search.js"></script>
 <script type="text/x-mathjax-config">
