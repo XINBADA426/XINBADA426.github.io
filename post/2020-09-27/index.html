@@ -4,19 +4,19 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
-    <title>吐槽 - Ming</title>
+    <title>使用 Key 进行 SSH 连接 - Ming</title>
     <meta name="keywords" content="Bioinfomatic">
     
-    <meta property="og:title" content="吐槽">
+    <meta property="og:title" content="使用 Key 进行 SSH 连接">
     <meta property="og:site_name" content="Ming">
     <meta property="og:image" content="/img/author.jpg"> 
-    <meta name="title" content="吐槽 - Ming" />
+    <meta name="title" content="使用 Key 进行 SSH 连接 - Ming" />
     <meta name="description" content="物无非彼，物无非是。自彼则不见，自是则知之。"> 
     <link rel="shortcut icon" href="https://xinbada426.github.io/img/favicon.ico" />
     <link rel="apple-touch-icon" href="https://xinbada426.github.io/img/apple-touch-icon.png" />
     <link rel="apple-touch-icon-precomposed" href="https://xinbada426.github.io/img/apple-touch-icon.png" />
     <link href="https://xinbada426.github.io/js/vendor/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-    
+    <link href="https://xinbada426.github.io/js/vendor/fancybox/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
     <link href="https://xinbada426.github.io/css/main.css" rel="stylesheet" type="text/css" />
     <link href="https://xinbada426.github.io/css/syntax.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" id="hexo.configuration">
@@ -24,13 +24,13 @@
   var CONFIG = {
     scheme: 'Pisces',
     sidebar: {"position":"left","display":"post"},
-    fancybox: false, 
+     fancybox: true, 
     motion: true
   };
 </script>
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-<div class="container one-collumn sidebar-position-left   ">
+<div class="container one-collumn sidebar-position-left page-home  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -99,71 +99,197 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-<section id="posts" class="posts-collapse">
-<div class="collection-title">
-    <h2 >吐槽
-    <small></small>
-    </h2>
-</div>
-
-<div class="collection-title">
-  <h2 class="archive-year motion-element" id="archive-year-2020">2020</h2>
-</div>
-
-  <article class="post post-type-normal }}" itemscope itemtype="http://schema.org/Article">
+<section id="posts" class="posts-expand">
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
-      <h1 class="post-title">
-        <a class="post-title-link" href="https://xinbada426.github.io/post/2020-06-04/" itemprop="url">
-            <span itemprop="name">今天晚上失眠了</span>
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link" href="https://xinbada426.github.io/post/2020-09-27/" itemprop="url">
+        使用 Key 进行 SSH 连接
         </a>
       </h1>
-
       <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-06-04"
-              content="06-04" >
-          06-04
-        </time>
+      <span class="post-time">
+<span class="post-meta-item-icon">
+    <i class="fa fa-calendar-o"></i>
+</span>
+<span class="post-meta-item-text"></span>
+<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2020-09-27">
+    2020-09-27
+</time>
+</span> 
+      
+
+  <span class="post-category" >
+  &nbsp; | &nbsp;
+  <span class="post-meta-item-icon">
+    <i class="fa fa-folder-o"></i>
+  </span>
+  <span class="post-meta-item-text"></span>
+  
+    <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+      <a href="https://xinbada426.github.io/categories/Linux" itemprop="url" rel="index">
+        <span itemprop="name">Linux</span>
+      </a>
+      &nbsp; 
+    </span>
+  
+</span>
+
+
+       <span>
+&nbsp; | &nbsp;
+<span class="post-meta-item-icon">
+    <i class="fa fa-eye"></i>
+</span>
+<span class="post-meta-item-text"></span>
+<span class="leancloud-visitors-count"></span>
+</span>
       </div>
     </header>
+    <div class="post-body" itemprop="articleBody">
+    <p><img src="https://cdn.jsdelivr.net/gh/XINBADA426/GraphicBed/img/ssh_connect.png" alt="SSH"></p>
+<blockquote>
+<p>一个自用服务器天天被各种尝试登陆，把密码登陆关了算了~</p>
+</blockquote>
+<h2 id="生成密匙对">生成密匙对</h2>
+<p>这一步可在 client 端 或者 server 端操作</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">ssh-keygen -t rsa -C <span class="s2">&#34;company&#34;</span> -b <span class="m">4096</span> -f ~/.ssh/company-rsa
+</code></pre></td></tr></table>
+</div>
+</div><p>-b：指定密钥长度；
+-C：添加注释；
+-f：指定用来保存密钥的文件名；
+-t：指定要创建的密钥类型。
+<em>文件名可以使用默认的</em></p>
+<p>这会在制定目录下生成两个文件</p>
+<ul>
+<li>company-rsa:          私匙，相当于你手中的钥匙</li>
+<li>company-rsa.pub: 公匙，相当于你家的们门锁</li>
+</ul>
+<h2 id="服务器端配置">服务器端配置</h2>
+<p>这一步相当于给你家装门锁</p>
+<h3 id="授权公匙">授权公匙</h3>
+<p>在用户目录新建 <code>.ssh/authorized_keys</code> 文件，将上一步生成的公匙复制到此文件</p>
+<h3 id="配置">配置</h3>
+<p>修改 <code>/etc/ssh/sshd_config</code> 文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">PubkeyAuthentication yes
+<span class="c1"># 另外，请留意 root 用户能否通过 SSH 登录：</span>
+PermitRootLogin yes
+</code></pre></td></tr></table>
+</div>
+</div><p>重启服务 <code>service sshd restart</code></p>
+<h3 id="禁用密码登陆">禁用密码登陆</h3>
+<p>修改 <code>/etc/ssh/sshd_config</code> 文件
+<em>务必确认此时可以使用 key 正常登陆</em></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 当你完成全部设置，并以密钥方式登录成功后，再禁用密码登录：</span>
+PasswordAuthentication no
+</code></pre></td></tr></table>
+</div>
+</div><p>重启服务 <code>service sshd restart</code></p>
+<h2 id="实现免密登陆">实现免密登陆</h2>
+<h3 id="权限设置">权限设置</h3>
+<ul>
+<li>服务器端</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 设置 .ssh 目录</span>
+chmod <span class="m">700</span> .ssh
+<span class="c1"># 设置 authorized_keys</span>
+chmod <span class="m">600</span> authorized_keys
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>设置客户端
+配置 <code>.ssh/config</code> 文件</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">Host    BWG
+        HostName 1.2.3.4
+        Port <span class="m">1234</span>
+        User root
+        IdentityFile a/b/rsa
+</code></pre></td></tr></table>
+</div>
+</div><p>更改私匙权限</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">chmod <span class="m">600</span> a/b/rsa
+</code></pre></td></tr></table>
+</div>
+</div><p>随后就可以通过 <code>ssh BWG</code> 直接登陆服务器</p>
+
+    </div>
+    <footer class="post-footer">
+     
+ 
+<div class="post-tags">     
+     
+    <a href="https://xinbada426.github.io/tags/ssh" rel="tag" title="SSH">#SSH#</a>
+    
+</div>
+
+
+
+     <div class="post-nav">
+    <div class="post-nav-next post-nav-item">
+    
+    </div>
+
+    <div class="post-nav-prev post-nav-item">
+    
+        <a href="https://xinbada426.github.io/post/2020-08-23/" rel="prev" title="Centos7 中各种国内源的配置">
+        Centos7 中各种国内源的配置 <i class="fa fa-chevron-right"></i>
+        </a>
+    
+    </div>
+</div>
+      
+     
+     
+     
+
+
+
+
+    </footer>
   </article>
-
-
- </section>
-
-
-
-
-
-
-
-
-
-  
-  
-
-
-
-
-
-
-  
-  
-
-
-
-<nav class="pagination">
-    
-    
-        
-        
-          <span class="page-number current">1</span>
-        
-        
-    
-    
-</nav>
-
+</section>
 
           </div>
         </div>
@@ -177,7 +303,16 @@
 <aside id="sidebar" class="sidebar">
   <div class="sidebar-inner">
 
-    <section class="site-overview sidebar-panel  sidebar-panel-active ">
+  <ul class="sidebar-nav motion-element">
+    <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+      
+    </li>
+    <li class="sidebar-nav-overview" data-target="site-overview">
+      
+    </li>
+  </ul>
+
+    <section class="site-overview sidebar-panel ">
       <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image"
         src="https://xinbada426.github.io/img/one_punch_man.jpeg"
@@ -213,13 +348,6 @@
     </div>
 </nav>
       
-<div class="feed-link motion-element">
-<a href="https://xinbada426.github.io/tags/%E5%90%90%E6%A7%BD/index.xml" rel="alternate" type="application/rss+xml" target="_blank">
-    <i class="fa fa-rss"></i>
-    
-</a>
-</div>
-
       
 <div class="links-of-author motion-element">
     
@@ -244,6 +372,28 @@
 
     </section>
     
+<section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+    <div class="post-toc">
+        <div class="post-toc-content"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#生成密匙对">生成密匙对</a></li>
+    <li><a href="#服务器端配置">服务器端配置</a>
+      <ul>
+        <li><a href="#授权公匙">授权公匙</a></li>
+        <li><a href="#配置">配置</a></li>
+        <li><a href="#禁用密码登陆">禁用密码登陆</a></li>
+      </ul>
+    </li>
+    <li><a href="#实现免密登陆">实现免密登陆</a>
+      <ul>
+        <li><a href="#权限设置">权限设置</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+    </div>
+</section>
+
   </div>
 </aside>
 
@@ -290,16 +440,18 @@
 <script type="text/javascript" src="https://xinbada426.github.io/js/vendor/velocity/velocity.ui.min.js?v=1.2.1"></script>
 <script src="https://xinbada426.github.io/js/vendor/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
 
+<script src="https://xinbada426.github.io/js/vendor/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+
 <script type="text/javascript" src="https://xinbada426.github.io/js/utils.js"></script>
 <script type="text/javascript" src="https://xinbada426.github.io/js/motion.js"></script>
 <script type="text/javascript" src="https://xinbada426.github.io/js/affix.js"></script>
 <script type="text/javascript" src="https://xinbada426.github.io/js/schemes/pisces.js"></script>
 
-<script type="text/javascript" src="https://xinbada426.github.io/js/bootstrap.js"></script>
+<script type="text/javascript" src="https://xinbada426.github.io/js/scrollspy.js"></script>
+<script type="text/javascript" src="https://xinbada426.github.io/js/post-details.js"></script>
+<script type="text/javascript" src="https://xinbada426.github.io/js/toc.js"></script>
 
-<script type="text/javascript" id="motion.page.archive">
-  $('.archive-year').velocity('transition.slideLeftIn');
-</script>
+<script type="text/javascript" src="https://xinbada426.github.io/js/bootstrap.js"></script>
 
 <script type="text/javascript" src="https://xinbada426.github.io/js/search.js"></script>
 <script type="text/x-mathjax-config">
