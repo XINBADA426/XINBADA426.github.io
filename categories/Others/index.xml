@@ -26,7 +26,7 @@
       <pubDate>Mon, 17 Aug 2020 22:19:22 +0800</pubDate>
       
       <guid>https://xinbada426.github.io/post/2020-08-17/</guid>
-      <description>这是一个 HUGO 使用的备忘 常用命令 新建文章 hugo new post/file_name.md 如要发布，记得修改 draft 为 true 在本地查看 hugo serve -D 建立静态网页 hugo -D 发布 进入 public 目录 使用 git 推送到 github</description>
+      <description>这是一个 HUGO 使用的备忘 常用命令 新建文章 hugo new post/file_name.md 如要发布，记得修改 draft 为 true 在本地查看 hugo serve -D 建立静态网页 1 2 3 4 # 不编译 draft 为 true 的文章 hugo # 编译 draft 为 true 的文</description>
     </item>
     
     <item>

@@ -1,30 +1,6 @@
 <search>
     
      <entry>
-        <title>使用 Key 进行 SSH 连接</title>
-        <url>https://xinbada426.github.io/post/2020-09-27/</url>
-        <categories>
-          <category>Linux</category>
-        </categories>
-        <tags>
-          <tag>SSH</tag>
-        </tags>
-        <content type="html">  一个自用服务器天天被各种尝试登陆，把密码登陆关了算了~
- 生成密匙对 这一步可在 client 端 或者 server 端操作
-1  ssh-keygen -t rsa -C &amp;#34;company&amp;#34; -b 4096 -f ~/.ssh/company-rsa   -b：指定密钥长度； -C：添加注释； -f：指定用来保存密钥的文件名； -t：指定要创建的密钥类型。 文件名可以使用默认的
-这会在制定目录下生成两个文件
- company-rsa: 私匙，相当于你手中的钥匙 company-rsa.pub: 公匙，相当于你家的们门锁  服务器端配置 这一步相当于给你家装门锁
-授权公匙 在用户目录新建 .ssh/authorized_keys 文件，将上一步生成的公匙复制到此文件
-配置 修改 /etc/ssh/sshd_config 文件
-1 2 3  PubkeyAuthentication yes # 另外，请留意 root 用户能否通过 SSH 登录： PermitRootLogin yes   重启服务 service sshd restart
-禁用密码登陆 修改 /etc/ssh/sshd_config 文件 务必确认此时可以使用 key 正常登陆
-1 2  # 当你完成全部设置，并以密钥方式登录成功后，再禁用密码登录： PasswordAuthentication no   重启服务 service sshd restart
-实现免密登陆 权限设置  服务器端  1 2 3 4  # 设置 .ssh 目录 chmod 700 .ssh # 设置 authorized_keys chmod 600 authorized_keys    设置客户端 配置 .ssh/config 文件  1 2 3 4 5  Host BWG HostName 1.2.3.4 Port 1234 User root IdentityFile a/b/rsa   更改私匙权限
-1  chmod 600 a/b/rsa   随后就可以通过 ssh BWG 直接登陆服务器
-</content>
-    </entry>
-    
-     <entry>
         <title>Centos7 中各种国内源的配置</title>
         <url>https://xinbada426.github.io/post/2020-08-23/</url>
         <categories>
@@ -65,8 +41,7 @@
         <content type="html">  这是一个 HUGO 使用的备忘
  常用命令 新建文章 hugo new post/file_name.md 如要发布，记得修改 draft 为 true
 在本地查看 hugo serve -D
-建立静态网页 hugo -D
-发布  进入 public 目录 使用 git 推送到 github  </content>
+建立静态网页 1 2 3 4  # 不编译 draft 为 true 的文章 hugo # 编译 draft 为 true 的文章 hugo -D   发布  进入 public 目录 使用 git 推送到 github  </content>
     </entry>
     
      <entry>
@@ -83,30 +58,6 @@
 1 2 3 4  $&amp;gt; java -version openjdk version &amp;#34;1.8.0_242&amp;#34; OpenJDK Runtime Environment (build 1.8.0_242-b08) OpenJDK 64-Bit Server VM (build 25.242-b08, mixed mode)   Data  gene2accession.gz gene_info.gz idmapping.tb.gz godatabase  b2g4pipe b2g4pipe_v2.5.zip 提取码：6p3s
 local_b2g_db local_b2g_db.tar.bz2 提取码：drb9
 数据库安装 创建b2g数据库并初始化各个表 1 2 3 4 5 6 7 8 9 10 11 12  # 创建 `gene2accession` `gene_info` `gi2uniprot` 这三个表 #&amp;gt; mysql -uroot -p &amp;lt; b2gdb.sql # 利用 go_monthly-assocdb 创建其它的表 # `assoc_rel` `association` `association_isoform` `association_property` `association_qualifier` `association_species_qualifier` `db` `dbxref` `evidence` `evidence_dbxref` `gene_product` `gene_product_ancestor` `gene_product_count` `gene_product_dbxref` `gene_product_homology` `gene_product_homolset` `gene_product_phylotree` `gene_product_property` `gene_product_seq` `gene_product_subset` `gene_product_synonym` `graph_path` `graph_path2term` `homolset` `instance_data` `intersection_of` `phylotree` `phylotree_property` `relation_composition``relation_properties` `seq` `seq_dbxref` `seq_property` `source_audit` `species` `term` `term2term` `term2term_metadata` `term_audit` `term_dbxref` `term_definition` `term_property` `term_subset` `term_synonym` #&amp;gt; mysql -uroot -p b2g &amp;lt; go_monthly-assocdb-data # 将文件 gene2accession 导入 表 `gene2accession` #&amp;gt; mysql -uroot -p b2g -e&amp;#34;LOAD DATA LOCAL INFILE &amp;#39;gene2accession&amp;#39; INTO TABLE gene2accession FIELDS TERMINATED BY &amp;#39;\t&amp;#39; LINES TERMINATED BY &amp;#39;\n&amp;#39;;&amp;#34; # 导入各种id映射关系 #&amp;gt; java -cp .:mysql-connector-java-5.0.8-bin.jar: ImportIdMapping idmapping.tb localhost b2g blast2go blast4it   示例运行  解压 b2g4pipe-2.5.0 并进入文件夹 修改 b2gPipe.properties 内的数据库信息如下（同在 b2gdb.sql 的构建数据库时的信息）  1 2 3 4 5  // GO and B2G Data Access Basic Dbacces.dbname=b2g Dbacces.dbhost=localhost Dbacces.dbuser=blast2go Dbacces.dbpasswd=blast4it   运行目录下的 runPipeExample.sh  已知问题  go_monthly-assocdb-data.gz这个文件最后的更新是2017年1月 数据库太大，我用来测试的破机子硬盘还是有点压力的  参考  本地Blast2GO安装，及其数据库更新和导入数据中断的解决方案-  </content>
-    </entry>
-    
-     <entry>
-        <title>今天晚上失眠了</title>
-        <url>https://xinbada426.github.io/post/2020-06-04/</url>
-        <categories>
-          <category>吐槽</category>
-        </categories>
-        <tags>
-          <tag>吐槽</tag>
-        </tags>
-        <content type="html"> 2020年，我已31岁。
-虽然不想承认，但又不得不承认，人到中年，越来越大的压力确实再每天拷打着我的内心。我一直认为自己是一个很乐观的人，长辈身体康健，无家中琐事担扰。但当年龄慢慢增长，自己独立于原生家庭，组成自己的家庭，越来越多的事情却让人不甚心烦。
-我缺钱！！！
-我长这么大从来没有觉得自己缺钱花，父母一直再尽他们所能，给我提供最好的环境，学生时代，每每手中钱花完，直接一个电话，父母便会把钱打到卡上，我没有体会过缺钱的滋味，自然不知道挣钱的辛苦。等到自己走入社会，由于自己本身是那种比较宅的人，工资发了也仅仅只是用作日常生活，也不用为钱发愁。虽然一直跟媳妇在一起，挣得不多，但挣多少花多少，也么有什么压力，过得也还算潇洒。
-工资涨了~赚的钱多了，但我们却感觉越来越穷了~因为自己的家庭的缘故，我也从来未想过夫妻双方原生家庭会对我们小两口的生活造成什么影响。妻子娘家从原来的几千几千的借，慢慢的变成几万几万~说得是借，但从未有说过还。妻子是个很善良的人，觉得父母养育之恩，给他们钱花是儿女本分，她的父母也不想同我们借。
-我说她就好像樊胜美，她否认，樊胜美的父母对她可坏了！！！
-手上有钱时尚不觉得如何，但今年的疫情，把我们这个问题的严重性全都暴露了出来。平时赚的钱都给她家人拿去，手中只留一点，托管无法继续，公司又在降薪，就看到卡里的钱在嗖嗖的往下掉，我们突然就慌了。今年本打算凑钱买房，但借出去的钱回不来，托管又赔了挺多，算是没戏了；本打算要个宝宝，但看着卡中那么点积蓄，却又犹豫了，这点钱，是不是连孩子都生不起~
-我父母都是老古董~
-这之前，我一直这么觉得。他们想让我找个条件好一些结婚，想让我去考公务员，想让我继续去读博~我那时就觉得，他们真是愚昧啊，这都什么年代了，什么门当户对~就公务员那点工资，还不够我吃喝~继续读？门都么有，我在学校早就呆不下去了，实在是太没意思了~
-现在想想，我真蠢~活生生的把自己的日子过成了一个地狱模式。
-我也开始对媳妇抱怨，我们过日子，养你那一大家子算是怎么回事？去考公务员，去读博？我有点动摇了~我想过离婚，自己一个人的日子是要好过太多，但也仅仅是想一想，我还是很爱我的媳妇的~
-深夜的抱怨，日子还是要过的，只希望能够越来越好~
-</content>
     </entry>
     
      <entry>
