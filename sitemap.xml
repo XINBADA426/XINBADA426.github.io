@@ -1,6 +1,67 @@
 <search>
     
      <entry>
+        <title>10x数据热图绘制之指定图例上下限</title>
+        <url>https://xinbada426.github.io/post/2021-05-22/</url>
+        <categories>
+          <category>Debug</category>
+        </categories>
+        <tags>
+          <tag>R</tag><tag>ggplot2</tag><tag>10x</tag>
+        </tags>
+        <content type="html"> 错误信息 最近处理10x数据，需要把已有的亚群合并，然后绘制目标基因的热图~ 朴实~ 无华~ 枯燥~ 处理完成之后，需要调整亚群绘制顺序，基因的顺序 OK~ 我改~
+one moment later&amp;hellip;&amp;hellip;
+“怎么这几张图的标度范围不一样？看起来不统一” 我改~ 也就是一个修改刻度~ 然后~ 然后我就后悔了~
+漫漫Debug路 第一次尝试 Seurat包里面热图，用的是ggplot2绘制的，一般处理这种问题，只要 获取对象后重新指定一下数据标准化的范围就好，搞一下配色什么的就完 事
+1 2 3 4 5  p &amp;lt;- p &#43; scale_fill_gradientn(limits=c(-2,2), breaks =c(-2,0,2), colours = PurpleAndYellow(), na.value = &amp;#34;white&amp;#34;) &#43; WhiteBackground()   本以为这样就结束，打开结果一看？喵喵喵~ 什么鬼，那一条条的白线是个 什么玩意儿？
+对比前后的结果，这些白色的部分在原始的图形中都被当作最大值处理（其 实是缺失值）。
+没问题~ 缺失值替换为黄色就好
+第二次处理 1 2 3 4 5  p &amp;lt;- p &#43; scale_fill_gradientn(limits=c(-2,2), breaks =c(-2,-1,0,1,2), colours = PurpleAndYellow(), na.value = &amp;#34;yellow&amp;#34;) &#43; WhiteBackground()   纳尼~ 那些组间的分隔怎么也变成了屎黄色？看来这样不对~
+第三次处理 查看图形对象中那些缺失的数据数据（原本是会有一些细胞也为缺失的，但我更新之后的ggplot对象没法重复之前的结果，不记得之前ggplot2是哪个版本了）
+1 2 3 4 5 6 7 8 9  p$data %&amp;gt;% filter(is.na(Expression)) # Feature Cell Expression Identity # 1 Rbp7 hrspdmjykfoinzbwqvtc NA Fibroblasts # 2 Sema3g hrspdmjykfoinzbwqvtc NA Fibroblasts # 3 Gpihbp1 hrspdmjykfoinzbwqvtc NA Fibroblasts # 4 Plpp1 hrspdmjykfoinzbwqvtc NA Fibroblasts # 5 Ly6c1 hrspdmjykfoinzbwqvtc NA Fibroblasts # 6 Emcn hrspdmjykfoinzbwqvtc NA Fibroblasts   这些奇怪名字的细胞就是用来生成那些组间分割的占位信息，在使用 na.value = &amp;quot;yellow&amp;quot; 时，把这些占位信息也给修改了，于是就有 了图中的屎黄色分割，处理方法也简单，只将那些正常细胞名称的表 达量由NA替换为我们的最大值即可~ 随后在scale_fill_gradientn中 将NA替换为白色即可~
+第四次处理 本来经过前面的处理，应该已经可以正常将热图的标度修改为指定的 范围~ But~ 当我重新运行脚本时却出现了如下的报错：
+1 2 3 4  Error in data.frame(group = sort(x = group.use), x = x.divs) : arguments imply differing number of rows: 2055, 0 Calls: PlotHeatmapPlot -&amp;gt; DoHeatmap -&amp;gt; data.frame Execution halted   我原来正常的脚本都跑不了了~这又是什么鬼~明明之前还好好的能够正常运行~ 谷歌之~ Error in DoHeatmap – no labelling of identities above colourbar possible 看来是版本问题~ 看一下自己环境里的r包，有人升级了ggplot2到3.3.3。 我也没有记录之前的ggplot2版本，之前的工作算是白做了~ 看了一下Seurat的更新记录，最新的版本已经到了4.x.x，但所用对象使用的是3.1.1，所以找一个比较近的版本： 重新安装一个v3.1.4版本的Seurat 里面的DoHeatmap方法果然有所改变，对ggplot 3.3.3进行了适配 这个版本的ggplot2在重新标准化之后细胞不再会出现缺失值，前面的方法也呵呵了~ 要消除白色的那些细胞，只需要将越过范围的值给赋值为其边界值即可
+1 2  p$data[!is.na(p$data$Expression) &amp;amp; (p$data$Expression &amp;gt; 2),]$Expression &amp;lt;- 2 p$data[!is.na(p$data$Expression) &amp;amp; (p$data$Expression &amp;lt; -2),]$Expression &amp;lt;- -2   剩下的调整一下theme就好了
+</content>
+    </entry>
+    
+     <entry>
+        <title>2020 11 13</title>
+        <url>https://xinbada426.github.io/post/2020-11-13/</url>
+        <categories>
+          <category>general</category>
+        </categories>
+        <tags>
+          <tag>document</tag>
+        </tags>
+        <content type="html"> </content>
+    </entry>
+    
+     <entry>
+        <title>使用 Key 进行 SSH 连接</title>
+        <url>https://xinbada426.github.io/post/2020-09-27/</url>
+        <categories>
+          <category>Linux</category>
+        </categories>
+        <tags>
+          <tag>SSH</tag>
+        </tags>
+        <content type="html">  一个自用服务器天天被各种尝试登陆，把密码登陆关了算了~
+ 生成密匙对 这一步可在 client 端 或者 server 端操作
+1  ssh-keygen -t rsa -C &amp;#34;company&amp;#34; -b 4096 -f ~/.ssh/company-rsa   -b：指定密钥长度； -C：添加注释； -f：指定用来保存密钥的文件名； -t：指定要创建的密钥类型。 文件名可以使用默认的
+这会在制定目录下生成两个文件
+ company-rsa: 私匙，相当于你手中的钥匙 company-rsa.pub: 公匙，相当于你家的们门锁  服务器端配置 这一步相当于给你家装门锁
+授权公匙 在用户目录新建 .ssh/authorized_keys 文件，将上一步生成的公匙复制到此文件
+配置 修改 /etc/ssh/sshd_config 文件
+1 2 3  PubkeyAuthentication yes # 另外，请留意 root 用户能否通过 SSH 登录： PermitRootLogin yes   重启服务 service sshd restart
+禁用密码登陆 修改 /etc/ssh/sshd_config 文件 务必确认此时可以使用 key 正常登陆
+1 2  # 当你完成全部设置，并以密钥方式登录成功后，再禁用密码登录： PasswordAuthentication no   重启服务 service sshd restart
+实现免密登陆 权限设置  服务器端  1 2 3 4  # 设置 .ssh 目录 chmod 700 .ssh # 设置 authorized_keys chmod 600 authorized_keys    设置客户端 配置 .ssh/config 文件  1 2 3 4 5  Host BWG HostName 1.2.3.4 Port 1234 User root IdentityFile a/b/rsa   更改私匙权限
+1  chmod 600 a/b/rsa   随后就可以通过 ssh BWG 直接登陆服务器
+</content>
+    </entry>
+    
+     <entry>
         <title>Centos7 中各种国内源的配置</title>
         <url>https://xinbada426.github.io/post/2020-08-23/</url>
         <categories>
@@ -58,6 +119,30 @@
 1 2 3 4  $&amp;gt; java -version openjdk version &amp;#34;1.8.0_242&amp;#34; OpenJDK Runtime Environment (build 1.8.0_242-b08) OpenJDK 64-Bit Server VM (build 25.242-b08, mixed mode)   Data  gene2accession.gz gene_info.gz idmapping.tb.gz godatabase  b2g4pipe b2g4pipe_v2.5.zip 提取码：6p3s
 local_b2g_db local_b2g_db.tar.bz2 提取码：drb9
 数据库安装 创建b2g数据库并初始化各个表 1 2 3 4 5 6 7 8 9 10 11 12  # 创建 `gene2accession` `gene_info` `gi2uniprot` 这三个表 #&amp;gt; mysql -uroot -p &amp;lt; b2gdb.sql # 利用 go_monthly-assocdb 创建其它的表 # `assoc_rel` `association` `association_isoform` `association_property` `association_qualifier` `association_species_qualifier` `db` `dbxref` `evidence` `evidence_dbxref` `gene_product` `gene_product_ancestor` `gene_product_count` `gene_product_dbxref` `gene_product_homology` `gene_product_homolset` `gene_product_phylotree` `gene_product_property` `gene_product_seq` `gene_product_subset` `gene_product_synonym` `graph_path` `graph_path2term` `homolset` `instance_data` `intersection_of` `phylotree` `phylotree_property` `relation_composition``relation_properties` `seq` `seq_dbxref` `seq_property` `source_audit` `species` `term` `term2term` `term2term_metadata` `term_audit` `term_dbxref` `term_definition` `term_property` `term_subset` `term_synonym` #&amp;gt; mysql -uroot -p b2g &amp;lt; go_monthly-assocdb-data # 将文件 gene2accession 导入 表 `gene2accession` #&amp;gt; mysql -uroot -p b2g -e&amp;#34;LOAD DATA LOCAL INFILE &amp;#39;gene2accession&amp;#39; INTO TABLE gene2accession FIELDS TERMINATED BY &amp;#39;\t&amp;#39; LINES TERMINATED BY &amp;#39;\n&amp;#39;;&amp;#34; # 导入各种id映射关系 #&amp;gt; java -cp .:mysql-connector-java-5.0.8-bin.jar: ImportIdMapping idmapping.tb localhost b2g blast2go blast4it   示例运行  解压 b2g4pipe-2.5.0 并进入文件夹 修改 b2gPipe.properties 内的数据库信息如下（同在 b2gdb.sql 的构建数据库时的信息）  1 2 3 4 5  // GO and B2G Data Access Basic Dbacces.dbname=b2g Dbacces.dbhost=localhost Dbacces.dbuser=blast2go Dbacces.dbpasswd=blast4it   运行目录下的 runPipeExample.sh  已知问题  go_monthly-assocdb-data.gz这个文件最后的更新是2017年1月 数据库太大，我用来测试的破机子硬盘还是有点压力的  参考  本地Blast2GO安装，及其数据库更新和导入数据中断的解决方案-  </content>
+    </entry>
+    
+     <entry>
+        <title>今天晚上失眠了</title>
+        <url>https://xinbada426.github.io/post/2020-06-04/</url>
+        <categories>
+          <category>吐槽</category>
+        </categories>
+        <tags>
+          <tag>吐槽</tag>
+        </tags>
+        <content type="html"> 2020年，我已31岁。
+虽然不想承认，但又不得不承认，人到中年，越来越大的压力确实再每天拷打着我的内心。我一直认为自己是一个很乐观的人，长辈身体康健，无家中琐事担扰。但当年龄慢慢增长，自己独立于原生家庭，组成自己的家庭，越来越多的事情却让人不甚心烦。
+我缺钱！！！
+我长这么大从来没有觉得自己缺钱花，父母一直再尽他们所能，给我提供最好的环境，学生时代，每每手中钱花完，直接一个电话，父母便会把钱打到卡上，我没有体会过缺钱的滋味，自然不知道挣钱的辛苦。等到自己走入社会，由于自己本身是那种比较宅的人，工资发了也仅仅只是用作日常生活，也不用为钱发愁。虽然一直跟媳妇在一起，挣得不多，但挣多少花多少，也么有什么压力，过得也还算潇洒。
+工资涨了~赚的钱多了，但我们却感觉越来越穷了~因为自己的家庭的缘故，我也从来未想过夫妻双方原生家庭会对我们小两口的生活造成什么影响。妻子娘家从原来的几千几千的借，慢慢的变成几万几万~说得是借，但从未有说过还。妻子是个很善良的人，觉得父母养育之恩，给他们钱花是儿女本分，她的父母也不想同我们借。
+我说她就好像樊胜美，她否认，樊胜美的父母对她可坏了！！！
+手上有钱时尚不觉得如何，但今年的疫情，把我们这个问题的严重性全都暴露了出来。平时赚的钱都给她家人拿去，手中只留一点，托管无法继续，公司又在降薪，就看到卡里的钱在嗖嗖的往下掉，我们突然就慌了。今年本打算凑钱买房，但借出去的钱回不来，托管又赔了挺多，算是没戏了；本打算要个宝宝，但看着卡中那么点积蓄，却又犹豫了，这点钱，是不是连孩子都生不起~
+我父母都是老古董~
+这之前，我一直这么觉得。他们想让我找个条件好一些结婚，想让我去考公务员，想让我继续去读博~我那时就觉得，他们真是愚昧啊，这都什么年代了，什么门当户对~就公务员那点工资，还不够我吃喝~继续读？门都么有，我在学校早就呆不下去了，实在是太没意思了~
+现在想想，我真蠢~活生生的把自己的日子过成了一个地狱模式。
+我也开始对媳妇抱怨，我们过日子，养你那一大家子算是怎么回事？去考公务员，去读博？我有点动摇了~我想过离婚，自己一个人的日子是要好过太多，但也仅仅是想一想，我还是很爱我的媳妇的~
+深夜的抱怨，日子还是要过的，只希望能够越来越好~
+</content>
     </entry>
     
      <entry>

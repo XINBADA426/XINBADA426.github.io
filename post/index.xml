@@ -6,10 +6,37 @@
     <description>Recent content in Posts on Ming</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 23 Aug 2020 15:45:41 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 22 May 2021 06:52:34 +0800</lastBuildDate>
     
 	<atom:link href="https://xinbada426.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>10x数据热图绘制之指定图例上下限</title>
+      <link>https://xinbada426.github.io/post/2021-05-22/</link>
+      <pubDate>Sat, 22 May 2021 06:52:34 +0800</pubDate>
+      
+      <guid>https://xinbada426.github.io/post/2021-05-22/</guid>
+      <description>错误信息 最近处理10x数据，需要把已有的亚群合并，然后绘制目标基因的热图~ 朴实~ 无华~ 枯燥~ 处理完成之后，需要调整亚群绘制顺序，基因的顺序 OK~</description>
+    </item>
+    
+    <item>
+      <title>2020 11 13</title>
+      <link>https://xinbada426.github.io/post/2020-11-13/</link>
+      <pubDate>Fri, 13 Nov 2020 21:58:49 +0800</pubDate>
+      
+      <guid>https://xinbada426.github.io/post/2020-11-13/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>使用 Key 进行 SSH 连接</title>
+      <link>https://xinbada426.github.io/post/2020-09-27/</link>
+      <pubDate>Sun, 27 Sep 2020 10:14:12 +0800</pubDate>
+      
+      <guid>https://xinbada426.github.io/post/2020-09-27/</guid>
+      <description>一个自用服务器天天被各种尝试登陆，把密码登陆关了算了~ 生成密匙对 这一步可在 client 端 或者 server 端操作 1 ssh-keygen -t rsa -C &amp;#34;company&amp;#34; -b 4096 -f ~/.ssh/company-rsa -b：指定密钥长度； -C：添加</description>
+    </item>
     
     <item>
       <title>Centos7 中各种国内源的配置</title>
@@ -27,33 +54,6 @@
       
       <guid>https://xinbada426.github.io/post/2020-08-18/</guid>
       <description>平时工作中碰到的需求，需要将 tsv/csv 文件转为 sqlite3 数据库文件，本来一直想用 python 的数据库接口来实现这一目的，但经在网上的搜索，发现直接使用 sqlite3 的点命令更为方</description>
-    </item>
-    
-    <item>
-      <title>HUGO 备忘</title>
-      <link>https://xinbada426.github.io/post/2020-08-17/</link>
-      <pubDate>Mon, 17 Aug 2020 22:19:22 +0800</pubDate>
-      
-      <guid>https://xinbada426.github.io/post/2020-08-17/</guid>
-      <description>这是一个 HUGO 使用的备忘 常用命令 新建文章 hugo new post/file_name.md 如要发布，记得修改 draft 为 true 在本地查看 hugo serve -D 建立静态网页 1 2 3 4 # 不编译 draft 为 true 的文章 hugo # 编译 draft 为 true 的文</description>
-    </item>
-    
-    <item>
-      <title>Blast2GO 本地化</title>
-      <link>https://xinbada426.github.io/post/2020-07-23/</link>
-      <pubDate>Fri, 24 Jul 2020 08:05:30 +0800</pubDate>
-      
-      <guid>https://xinbada426.github.io/post/2020-07-23/</guid>
-      <description>准备 Linux版本信息 1 2 #&amp;gt; cat /etc/redhat-release CentOS Linux release 7.7.1908 (Core) mysql 如果你从未使用过mysql 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 # 下载源 #&amp;gt; wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm # 安装源</description>
-    </item>
-    
-    <item>
-      <title>PBS作业投递系统使用</title>
-      <link>https://xinbada426.github.io/post/2020-06-01/</link>
-      <pubDate>Mon, 01 Jun 2020 11:00:26 +0800</pubDate>
-      
-      <guid>https://xinbada426.github.io/post/2020-06-01/</guid>
-      <description>系统架构 计算节点共有5台曙光I840-G30四路服务器。每台服务器配置4颗20核Intel Xeon 6248 2.5GHz处理器，1536G DDR4内存。 G</description>
     </item>
     
   </channel>
