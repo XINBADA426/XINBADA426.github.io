@@ -6,33 +6,24 @@
     <description>Recent content in Categories on Ming</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 22 May 2021 06:52:34 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 01 Jun 2021 23:23:25 +0800</lastBuildDate>
     
 	<atom:link href="https://xinbada426.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Debug</title>
-      <link>https://xinbada426.github.io/categories/Debug/</link>
-      <pubDate>Sat, 22 May 2021 06:52:34 +0800</pubDate>
+      <title>bioinformation</title>
+      <link>https://xinbada426.github.io/categories/bioinformation/</link>
+      <pubDate>Tue, 01 Jun 2021 23:23:25 +0800</pubDate>
       
-      <guid>https://xinbada426.github.io/categories/Debug/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>general</title>
-      <link>https://xinbada426.github.io/categories/general/</link>
-      <pubDate>Fri, 13 Nov 2020 21:58:49 +0800</pubDate>
-      
-      <guid>https://xinbada426.github.io/categories/general/</guid>
+      <guid>https://xinbada426.github.io/categories/bioinformation/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Linux</title>
       <link>https://xinbada426.github.io/categories/Linux/</link>
-      <pubDate>Sun, 27 Sep 2020 10:14:12 +0800</pubDate>
+      <pubDate>Sun, 23 Aug 2020 15:45:41 +0800</pubDate>
       
       <guid>https://xinbada426.github.io/categories/Linux/</guid>
       <description></description>
@@ -44,15 +35,6 @@
       <pubDate>Tue, 18 Aug 2020 22:02:40 +0800</pubDate>
       
       <guid>https://xinbada426.github.io/categories/Others/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>bioinformation</title>
-      <link>https://xinbada426.github.io/categories/bioinformation/</link>
-      <pubDate>Fri, 24 Jul 2020 08:05:30 +0800</pubDate>
-      
-      <guid>https://xinbada426.github.io/categories/bioinformation/</guid>
       <description></description>
     </item>
     

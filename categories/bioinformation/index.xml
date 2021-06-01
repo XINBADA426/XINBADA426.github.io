@@ -6,10 +6,19 @@
     <description>Recent content in bioinformation on Ming</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 24 Jul 2020 08:05:30 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 01 Jun 2021 23:23:25 +0800</lastBuildDate>
     
 	<atom:link href="https://xinbada426.github.io/categories/bioinformation/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>MetaStat原理</title>
+      <link>https://xinbada426.github.io/post/2021-06-01/</link>
+      <pubDate>Tue, 01 Jun 2021 23:23:25 +0800</pubDate>
+      
+      <guid>https://xinbada426.github.io/post/2021-06-01/</guid>
+      <description>一直不清楚MetaStat的脚本输入到底应该是Read数还是相对丰度，大概过了一下R语言版本的MetaStat代码的脚本，留此记录。 代码解析</description>
+    </item>
     
     <item>
       <title>Blast2GO 本地化</title>

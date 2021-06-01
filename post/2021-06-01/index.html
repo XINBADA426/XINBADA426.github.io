@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
-    <title>如何将表格文件转为 sqlite3 数据库文件 - Ming</title>
+    <title>MetaStat原理 - Ming</title>
     <meta name="keywords" content="Bioinfomatic">
     
-    <meta property="og:title" content="如何将表格文件转为 sqlite3 数据库文件">
+    <meta property="og:title" content="MetaStat原理">
     <meta property="og:site_name" content="Ming">
     <meta property="og:image" content="/img/author.jpg"> 
-    <meta name="title" content="如何将表格文件转为 sqlite3 数据库文件 - Ming" />
+    <meta name="title" content="MetaStat原理 - Ming" />
     <meta name="description" content="物无非彼，物无非是。自彼则不见，自是则知之。"> 
     <link rel="shortcut icon" href="https://xinbada426.github.io/img/favicon.ico" />
     <link rel="apple-touch-icon" href="https://xinbada426.github.io/img/apple-touch-icon.png" />
@@ -109,8 +109,8 @@
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
       <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link" href="https://xinbada426.github.io/post/2020-08-18/" itemprop="url">
-        如何将表格文件转为 sqlite3 数据库文件
+        <a class="post-title-link" href="https://xinbada426.github.io/post/2021-06-01/" itemprop="url">
+        MetaStat原理
         </a>
       </h1>
       <div class="post-meta">
@@ -119,8 +119,8 @@
     <i class="fa fa-calendar-o"></i>
 </span>
 <span class="post-meta-item-text"></span>
-<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2020-08-18">
-    2020-08-18
+<time itemprop="dateCreated" datetime="2016-03-22T13:04:35+08:00" content="2021-06-01">
+    2021-06-01
 </time>
 </span> 
       
@@ -133,8 +133,8 @@
   <span class="post-meta-item-text"></span>
   
     <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-      <a href="https://xinbada426.github.io/categories/Others" itemprop="url" rel="index">
-        <span itemprop="name">Others</span>
+      <a href="https://xinbada426.github.io/categories/bioinformation" itemprop="url" rel="index">
+        <span itemprop="name">bioinformation</span>
       </a>
       &nbsp; 
     </span>
@@ -153,112 +153,28 @@
       </div>
     </header>
     <div class="post-body" itemprop="articleBody">
-    <p><img src="https://cdn.jsdelivr.net/gh/XINBADA426/GraphicBed/img/sqlite.png" alt="sqlite3"></p>
-<blockquote>
-<p>平时工作中碰到的需求，需要将 tsv/csv 文件转为 sqlite3 数据库文件，本来一直想用 python 的数据库接口来实现这一目的，但经在网上的搜索，发现直接使用 sqlite3 的点命令更为方便，特此记录。</p>
-</blockquote>
-<h2 id="数据准备">数据准备</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="k">for</span> i in <span class="o">{</span>1..10<span class="o">}</span><span class="p">;</span><span class="k">do</span> <span class="nb">echo</span> -e <span class="s2">&#34;</span><span class="nv">$i</span><span class="s2">\t</span><span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">;</span><span class="k">done</span> &gt; test.tsv
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="数据库生成">数据库生成</h2>
+    <p><img src="https://upload-images.jianshu.io/upload_images/2638048-3a05380756fdbdff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="MetaStat"></p>
+<p>一直不清楚MetaStat的脚本输入到底应该是Read数还是相对丰度，大概过了一下R语言版本的MetaStat代码的脚本，留此记录。</p>
+<h2 id="代码解析">代码解析</h2>
+<p>R语言版本的MetaStat被封装到了一个R函数内部，针对不同的数据输入，MetaStat会采用不同的处理策略</p>
+<h3 id="两个比较组都是单样本无重复">两个比较组都是单样本无重复</h3>
+<p>此时MetatStat使用Fisher精确检验或卡方检验（每个样本内tag或reads数都大于20）
+<em>涉及到Fisher或卡方检验的输入都是列联表，肯定都是整数因此理想的输入的表格内都应该是整数</em></p>
+<h3 id="有重复">有重复</h3>
+<p>MetaStat对于有重复的样本（或者说是上述情况以外）的比较组的统计分为两步</p>
 <ol>
-<li>连接数据库</li>
+<li>对于输入的每一行，都会通过T检验计算其t统计量（这里使用的是每个样本的相对丰度），然后通过t统计量利用置换检验算出p值</li>
+<li>重新遍历每一行，对于在两个比较组内平均tag数小于1的行，重新利用Fisher精确检验计算p值替换前一步得到的该物种的p值</li>
 </ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 如果没有 test.db, 则会自动生成</span>
-sqlite3 test.db
-</code></pre></td></tr></table>
-</div>
-</div><ol start="2">
-<li>使用 sqlite3 的点命令生成表</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-SQL" data-lang="SQL"><span class="o">#</span> <span class="err">查看数据库内已有的</span> <span class="k">table</span>
-<span class="p">.</span><span class="n">tables</span>
-
-<span class="o">#</span> <span class="err">设定为制表符输出</span>
-<span class="p">.</span><span class="k">mode</span> <span class="n">tabs</span>
-
-<span class="o">#</span> <span class="err">有头，首行将作为</span> <span class="n">headr</span><span class="err">，把表格导入名为</span> <span class="n">head</span> <span class="err">的</span> <span class="k">table</span> <span class="err">中</span>
-<span class="p">.</span><span class="n">import</span> <span class="n">test</span><span class="p">.</span><span class="n">tsv</span> <span class="n">head</span>
-<span class="o">#</span> <span class="err">查看</span> <span class="n">header</span>
-<span class="p">.</span><span class="k">schema</span> <span class="n">head</span>
-<span class="o">#</span> <span class="err">查看前</span><span class="mi">5</span><span class="err">行</span>
-<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">head</span> <span class="k">LIMIT</span> <span class="mi">5</span><span class="p">;</span>
-<span class="o">#</span> <span class="mi">2</span>	<span class="mi">2</span><span class="n">_2</span>
-<span class="o">#</span> <span class="mi">3</span>	<span class="mi">3</span><span class="n">_3</span>
-<span class="o">#</span> <span class="mi">4</span>	<span class="mi">4</span><span class="n">_4</span>
-<span class="o">#</span> <span class="mi">5</span>	<span class="mi">5</span><span class="n">_5</span>
-<span class="o">#</span> <span class="mi">6</span>	<span class="mi">6</span><span class="n">_6</span>
-
-
-<span class="o">#</span> <span class="err">无头，把表格导入名为</span> <span class="n">nohead</span> <span class="err">的</span> <span class="k">table</span> <span class="err">中</span>
-<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">nohead</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">);</span>
-<span class="p">.</span><span class="n">import</span> <span class="n">test</span><span class="p">.</span><span class="n">tsv</span> <span class="n">nohead</span>
-<span class="o">#</span> <span class="err">查看</span> <span class="n">header</span>
-<span class="p">.</span><span class="k">schema</span> <span class="n">nohead</span>
-<span class="o">#</span> <span class="err">查看前</span><span class="mi">5</span><span class="err">行</span>
-<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">nohead</span> <span class="k">LIMIT</span> <span class="mi">5</span><span class="p">;</span>
-<span class="o">#</span> <span class="mi">1</span>	<span class="mi">1</span><span class="n">_1</span>
-<span class="o">#</span> <span class="mi">2</span>	<span class="mi">2</span><span class="n">_2</span>
-<span class="o">#</span> <span class="mi">3</span>	<span class="mi">3</span><span class="n">_3</span>
-<span class="o">#</span> <span class="mi">4</span>	<span class="mi">4</span><span class="n">_4</span>
-<span class="o">#</span> <span class="mi">5</span>	<span class="mi">5</span><span class="n">_5</span>
-
-<span class="o">#</span> <span class="err">退出数据库</span>
-<span class="p">.</span><span class="n">quit</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="备注">备注</h2>
-<p>常用的点命令可使用 <code>.help</code> 查询，<code>.help command</code>可查看某一点命令的具体使用方法</p>
+<h2 id="感想">感想</h2>
+<p>综上所述，应该使用count/reads值作为其函数的输入</p>
+<h2 id="吐槽">吐槽</h2>
+<ul>
+<li>这个R代码内各种for循环~ 效率真是不高~</li>
+<li>有空看一下置换检验，这里置换检验也是限制代码执行时间的坑~
+好像<a href="https://github.com/mothur/mothur">mothur</a>里面有C++的版本，有时间试一下</li>
+</ul>
+<p><img src="https://upload-images.jianshu.io/upload_images/2638048-0a07521c834be9ef.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="不是那个西瓜"></p>
 
     </div>
     <footer class="post-footer">
@@ -266,9 +182,7 @@ sqlite3 test.db
  
 <div class="post-tags">     
      
-    <a href="https://xinbada426.github.io/tags/%e6%95%b0%e6%8d%ae%e5%ba%93" rel="tag" title="数据库">#数据库#</a>
-    
-    <a href="https://xinbada426.github.io/tags/sql" rel="tag" title="SQL">#SQL#</a>
+    <a href="https://xinbada426.github.io/tags/%e5%ae%8f%e5%9f%ba%e5%9b%a0%e7%bb%84" rel="tag" title="宏基因组">#宏基因组#</a>
     
 </div>
 
@@ -277,16 +191,12 @@ sqlite3 test.db
      <div class="post-nav">
     <div class="post-nav-next post-nav-item">
     
-        <a href="https://xinbada426.github.io/post/2020-08-23/" rel="next" title="Centos7 中各种国内源的配置">
-        <i class="fa fa-chevron-left"></i> Centos7 中各种国内源的配置
-        </a>
-    
     </div>
 
     <div class="post-nav-prev post-nav-item">
     
-        <a href="https://xinbada426.github.io/post/2020-08-17/" rel="prev" title="HUGO 备忘">
-        HUGO 备忘 <i class="fa fa-chevron-right"></i>
+        <a href="https://xinbada426.github.io/post/2020-08-23/" rel="prev" title="Centos7 中各种国内源的配置">
+        Centos7 中各种国内源的配置 <i class="fa fa-chevron-right"></i>
         </a>
     
     </div>
@@ -388,9 +298,14 @@ sqlite3 test.db
     <div class="post-toc">
         <div class="post-toc-content"><nav id="TableOfContents">
   <ul>
-    <li><a href="#数据准备">数据准备</a></li>
-    <li><a href="#数据库生成">数据库生成</a></li>
-    <li><a href="#备注">备注</a></li>
+    <li><a href="#代码解析">代码解析</a>
+      <ul>
+        <li><a href="#两个比较组都是单样本无重复">两个比较组都是单样本无重复</a></li>
+        <li><a href="#有重复">有重复</a></li>
+      </ul>
+    </li>
+    <li><a href="#感想">感想</a></li>
+    <li><a href="#吐槽">吐槽</a></li>
   </ul>
 </nav></div>
     </div>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>宏基因组 on Ming</title>
+    <link>https://xinbada426.github.io/tags/%E5%AE%8F%E5%9F%BA%E5%9B%A0%E7%BB%84/</link>
+    <description>Recent content in 宏基因组 on Ming</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 01 Jun 2021 23:23:25 +0800</lastBuildDate>
+    
+	<atom:link href="https://xinbada426.github.io/tags/%E5%AE%8F%E5%9F%BA%E5%9B%A0%E7%BB%84/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MetaStat原理</title>
+      <link>https://xinbada426.github.io/post/2021-06-01/</link>
+      <pubDate>Tue, 01 Jun 2021 23:23:25 +0800</pubDate>
+      
+      <guid>https://xinbada426.github.io/post/2021-06-01/</guid>
+      <description>一直不清楚MetaStat的脚本输入到底应该是Read数还是相对丰度，大概过了一下R语言版本的MetaStat代码的脚本，留此记录。 代码解析</description>
+    </item>
+    
+  </channel>
+</rss>
