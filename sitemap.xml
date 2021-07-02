@@ -1,6 +1,25 @@
 <search>
     
      <entry>
+        <title>Restricted cubic spline（RCS）：限制性立方样条</title>
+        <url>https://xinbada426.github.io/post/2021-06-25/</url>
+        <categories>
+          <category>bioinformation</category>
+        </categories>
+        <tags>
+          <tag>RCS</tag>
+        </tags>
+        <content type="html"> 当我们的自变量和因变量之间不是简单的线性关系，我们还可以通过多项式回归，多元线性回归等方法构造非线性的关系模型，限制性立方样条（RCS）也是一种选择。
+什么是Restricted cubic spline 实在是不了解这个东西到底是怎么翻译成的，因为仅仅从他的中文译名来看限制性立方样条，我们可能会有这样的疑惑：这里的每个汉字我都认识，但连在一起到底是个什么玩意儿？
+要了解什么是Restricted cubic spline（限制性立方样条），就要先了解什么是spline（样条函数）。
+ 样条函数 在计算机科学的计算机辅助设计和计算机图形学中，样条通常是指分段定义的多项式参数曲线。由于样条构造简单，使用方便，拟合准确，并能近似曲线拟合和交互式曲线设计中复杂的形状，样条是这些领域中曲线的常用表示方法。
+ 样条函数里面的关键词分段，然后再加上限制性立方样条中的关键词限制，是我们理解RCS的关键所在。同一般的非线性回归相比，限制性立方样条是分段的，每一区间有其自己的函数，且最两侧的区间都为线性函数。
+示例代码 下面是一个使用Cox模型进行限制性立方样条分析的脚本，你可以将里面的模型替换为自己想用的模型~
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119  options(warn = -1) suppressPackageStartupMessages({ library(optparse) library(stringr) library(ggplot2) library(rms) library(logging) }) basicConfig() option_list &amp;lt;- list( make_option(c(&amp;#34;-t&amp;#34;, &amp;#34;--table&amp;#34;), type = &amp;#34;character&amp;#34;, help = &amp;#34;The input table&amp;#34;), make_option(c(&amp;#34;--time&amp;#34;), type = &amp;#34;character&amp;#34;, help = &amp;#34;The time tag&amp;#34;), make_option(c(&amp;#34;--dv&amp;#34;), type = &amp;#34;character&amp;#34;, help = &amp;#34;The dependent variable tag name&amp;#34;), make_option(c(&amp;#34;--iv&amp;#34;), type = &amp;#34;character&amp;#34;, help = &amp;#34;The Independent variable tag name(x)&amp;#34;), make_option(c(&amp;#34;--covariate&amp;#34;), type = &amp;#34;character&amp;#34;, help = &amp;#34;The covariate variable tag names(comma split)&amp;#34;), make_option( c(&amp;#34;--knots&amp;#34;), default = 3, type = &amp;#34;integer&amp;#34;, help = &amp;#34;The number of knots[default= %default]&amp;#34; ), make_option( c(&amp;#34;--prefix&amp;#34;), default = &amp;#34;res&amp;#34;, type = &amp;#34;character&amp;#34;, help = &amp;#34;The out put prefix[default= %default]&amp;#34; ) ) opts &amp;lt;- parse_args( OptionParser(usage = &amp;#34;%prog [options]&amp;#34;, option_list = option_list, description = &amp;#34;\n使用Cox比例风险回归模型进行限制性立方样条（Restricted cubic spline）分析&amp;#34;), positional_arguments = F ) #### Some Functions #### RCS_plot &amp;lt;- function(data, x) { p &amp;lt;- ggplot() &#43; geom_line( data = data, aes_string(x, &amp;#34;yhat&amp;#34;), linetype = &amp;#34;solid&amp;#34;, size = 1, alpha = 0.7, color = &amp;#34;#B521F5&amp;#34; ) &#43; geom_line( data = data, aes_string(x, &amp;#34;lower&amp;#34;), linetype = &amp;#34;dashed&amp;#34;, size = 1, alpha = 0.7, color = &amp;#34;#B521F5&amp;#34; ) &#43; geom_line( data = data, aes_string(x, &amp;#34;upper&amp;#34;), linetype = &amp;#34;dashed&amp;#34;, size = 1, alpha = 0.7, color = &amp;#34;#B521F5&amp;#34; ) &#43; geom_hline( yintercept = 1, linetype = &amp;#34;solid&amp;#34;, size = 0.5, color = &amp;#34;black&amp;#34; ) &#43; ylab(&amp;#34;HR(95%CI)\n&amp;#34;) &#43; xlab(str_c(&amp;#34;\n&amp;#34;, x)) &#43; theme_classic() &#43; theme(text = element_text(size = 20)) p } ######################## loginfo(&amp;#34;Read the input table&amp;#34;) data &amp;lt;- read.csv(opts$table, sep = &amp;#34;\t&amp;#34;, check.names = F) # Prepare loginfo(&amp;#34;Prepare the data&amp;#34;) dd &amp;lt;- datadist(data) options(datadist = &amp;#39;dd&amp;#39;) # Model loginfo(&amp;#34;Fit the model&amp;#34;) y &amp;lt;- str_c(&amp;#34;Surv(&amp;#34;, opts$time, &amp;#34;,&amp;#34;, opts$dv, &amp;#34;)&amp;#34;) x &amp;lt;- str_c(&amp;#34;rcs(&amp;#34;, opts$iv, &amp;#39;,&amp;#39;, opts$knots, &amp;#39;)&amp;#39;) if (!is.null(opts$covariate)) { list_cv &amp;lt;- str_split(opts$covariate, pattern = &amp;#39;,&amp;#39;)[[1]] cv &amp;lt;- paste(list_cv, sep = &amp;#39;,&amp;#39;) x &amp;lt;- paste(c(x, cv), sep = &amp;#34;,&amp;#34;) } form &amp;lt;- as.formula(paste(y, &amp;#34;~&amp;#34;, x)) fit &amp;lt;- cph(form, data = data) # Predict loginfo(&amp;#34;Predict&amp;#34;) HR &amp;lt;- Predict(fit, WBC, fun = exp, ref.zero = TRUE) # Plot loginfo(&amp;#34;Plot&amp;#34;) p &amp;lt;- RCS_plot(HR, opts$iv) ggsave( str_c(opts$prefix, &amp;#34;pdf&amp;#34;, sep = &amp;#39;.&amp;#39;), plot = p, width = 8, height = 7 )   名词解释 hazard ratio  hazard ratio 风险比率，正式的英文名称是Hazard Ratio。风险比率是两个风险率（Hazard Rates）的比值。风险率是单位时间内发生的事件数占被试总体的百分比。
+ </content>
+    </entry>
+    
+     <entry>
         <title>MetaStat原理</title>
         <url>https://xinbada426.github.io/post/2021-06-01/</url>
         <categories>

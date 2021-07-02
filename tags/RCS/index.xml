@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RCS on Ming</title>
+    <link>https://xinbada426.github.io/tags/RCS/</link>
+    <description>Recent content in RCS on Ming</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 25 Jun 2021 23:37:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://xinbada426.github.io/tags/RCS/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Restricted cubic spline（RCS）：限制性立方样条</title>
+      <link>https://xinbada426.github.io/post/2021-06-25/</link>
+      <pubDate>Fri, 25 Jun 2021 23:37:00 +0800</pubDate>
+      
+      <guid>https://xinbada426.github.io/post/2021-06-25/</guid>
+      <description>当我们的自变量和因变量之间不是简单的线性关系，我们还可以通过多项式回归，多元线性回归等方法构造非线性的关系模型，限制性立方样条（RCS）也是</description>
+    </item>
+    
+  </channel>
+</rss>
